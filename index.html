@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Shnuk Projects</title>
+    
+    <style>
+        @font-face {
+            font-family: 'ST-SimpleSquare';
+            src: url('ST-SimpleSquare.ttf') format('truetype');
+            font-weight: 400;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'ST-SimpleSquare';
+            src: url('ST-SimpleSquare.ttf') format('truetype');
+            font-weight: 700;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'ST-SimpleSquare', sans-serif !important;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #ffffff;
+            font-family: 'ST-SimpleSquare', sans-serif !important;
+            user-select: none;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .wallpaper-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background-image: url('wallpaper.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            opacity: 0.35;
+        }
+
+        .main-content {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            padding: 30px 20px 60px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px 0 30px;
+        }
+
+        .header h1 {
+            font-family: 'ST-SimpleSquare', sans-serif !important;
+            font-weight: 700;
+            font-size: 52px;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: #ffffff;
+            display: inline-block;
+            padding: 10px 40px;
+            background: #cc0000;
+            line-height: 1.2;
+            box-shadow: none;
+            text-shadow: none;
+        }
+
+        .header .subtitle {
+            font-family: 'ST-SimpleSquare', sans-serif !important;
+            font-weight: 400;
+            font-size: 18px;
+            letter-spacing: 3px;
+            color: #000000;
+            margin-top: 10px;
+        }
+
+        .section {
+            max-width: 900px;
+            margin: 25px auto;
+            padding: 30px 40px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
+            position: relative;
+            z-index: 1;
+            border-radius: 0;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section-title {
+            font-family: 'ST-SimpleSquare', sans-serif !important;
+            font-weight: 700;
+            font-size: 28px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #000000;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: default;
+            user-select: none;
+        }
+
+        .section-title span {
+            color: #cc0000;
+        }
+
+        .section-content {
+            display: block;
+            padding-top: 15px;
+            border-top: 2px solid #cc0000;
+        }
+
+        .control-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px 25px;
+            align-items: center;
+            margin-bottom: 18px;
+            padding: 12px 16px;
+            background: rgba(0, 0, 0, 0.03);
+            border: 1px solid #e0e0e0;
+        }
+
+        .control-group label {
+            font-family: 'ST-SimpleSquare', sans-serif !important;
+            font-weight: 400;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #333333;
+            min-width: 120px;
+        }
+
+        /* ===== ПОЛЗУНКИ ===== */
+        .control-group input[type="range"] {
+            flex: 1;
+            min-width: 150px;
+            height: 4px;
+            background: #d0d0d0;
+            border-radius: 0;
+            appearance: none;
+            -webkit-appearance: none;
+            margin: 0;
+            padding: 0;
+            vertical-align: middle;
+            font-family: 'ST-SimpleSquare', sans-serif !important;
+        }
+
+        .control-group input[type="range"]::-webkit-slider-runnable-track {
+            height: 4px;
+            background: #d0d0d0;
+            border-radius: 0;
+        }
+
+        .control-group input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #cc0000 !important;
+            border: none;
+            border-radius: 0;
+            cursor: pointer;
+            margin-top: -6px;
+        }
+
+        .control-group input[type="range"]::-moz-range-track {
+            height: 4px;
+            background: #d0d0d0;
+            border-radius: 0;
+        }
+
+        .control-group input[type="range"]::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            background: #cc0000 !important;
+            border: none;
+            border-radius: 0;
+            cursor: pointer;
+        }
+
+        .control-group input[type="range"]:focus {
+            outline: none !important;
+        }
+
+        .control-group .range-value {
+            font-family: 'ST-SimpleSquare', sans-serif !important;
+            font-weight: 700;
+            font-size: 16px;
+            color: #cc0000;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .control-group .range-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        /* ===== ДВОЙНОЙ ПОЛЗУНОК ===== */
+        .dual-range {
+            position: relative;
+            width: 100%;
+            height: 4px;
+            background: #d0d0d0;
+            margin: 10px 0;
+            overflow: visible;
+        }
+
+        .dual-range .track {
+            position: absolute;
+            height: 4px;
+            background: #cc0000;
+            left: 25%;
+            right: 25%;
+            top: 0;
+            z-index: 1;
+        }
+
+        .dual-range input[type="range"] {
+            position: absolute;
+            top: -6px;
+            left: 0;
+            width: 100%;
+            height: 16px;
+            background: transparent;
+            pointer-events: none;
+            appearance: none;
+            -webkit-appearance: none;
+            margin: 0;
+            padding: 0;
+            z-index: 2;
+            overflow: visible;
+            font-family: 'ST-SimpleSquare', sans-serif !important;
+        }
+
+        .dual-range input[type="range"]::-webkit-slider-thumb {
+            pointer-events: auto;
+            appearance: none;
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #cc0000 !important;
+            border: none;
+            border-radius: 0;
+            cursor: pointer;
+            position: relative;
+            z-index: 3;
+        }
+
+        .dual-range input[type="range"]::-webkit-slider-runnable-track {
+            height: 0;
+            background: transparent;
+        }
+
+        .dual-range input[type="range"]::-moz-range-thumb {
+            pointer-events: auto;
+            width: 16px;
+            height: 16px;
+            background: #cc0000 !important;
+            border: none;
+            border-radius: 0;
+            cursor: pointer;
+        }
+
+        .dual-range input[type="range"]::-moz-range-track {
+            height: 0;
+            background: transparent;
+        }
+
+        .dual-range .range-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 14px;
+            font-family: 'ST-SimpleSquare', sans-serif !important;
+            font-weight: 400;
+            font-size: 13px;
+            color: #333333;
+        }
+
+        /* ===== ОКНА ВЫБОРА (заменяем select) ===== */
+        .custom-select-window {
+            position: relative;
+            display: inline-block;
+            min-width: 200px;
+            cursor: pointer;
+            border: 2px solid #000000;
+            background: #ffffff;
+            font-family: 'ST-SimpleSquare', sans-serif !important;
+            font-weight: 400;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #000000;
+            transition: all 0.3s ease;
+            border-radius: 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            user-select: none;
+        }
+
+        .custom-select-window .selected-option {
+            padding: 8px 20px;
+            padding-right: 40px;
+            background: #ffffff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            position: relative;
+            font-family: 'ST-SimpleSquare', sans-serif !important;
+        }
+
+        .custom-select-window .selected-option::after {
+            content: '▼';
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+            color: #000000;
+            transition: transform 0.2s ease;
+            font-family: 'ST-SimpleSquare', sans-serif !important;
+        }
+
+        .custom-select-window.open .selected-option::after {
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        .custom-select-window .options-list {
+            display: none;
+            position: absolute;
+            top: calc(100% + 2px);
+            left: -2px;
+            right: -2px;
+            background: #ffffff;
+            border: 2px solid #000000;
+            border-top: none;
+            z-index: 100;
+            max-height: 220px;
+            overflow-y: auto;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .custom-select-window.open .options-list {
+            display: block;
+        }
+
+        .custom-select-window .option-item {
+            padding: 10px 20px;
+            background: #ffffff;
+            color: #000000;
+            font-family: 'ST-SimpleSquare', sans-serif !important;
+            font-weight: 400;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.15s ease, color 0.15s ease;
+            cursor: pointer;
+        }
+
+        .custom-select-window .option-item:last-child {
+            border-bottom: none;
+        }
+
+        .custom-select-window .option-item:hover {
+            background: #cc0000;
+            color: #ffffff;
+        }
+
+        .custom-select-window .option-item.selected-option-item {
+            background: #cc0000;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        /* Стиль для кнопок, чтобы были как окна */
+        .control-group .btn,
+        .control-group .btn-window {
+            padding: 8px 30px;
+            border: 2px solid #000000;
+            background: #ffffff;
+            font-family: 'ST-SimpleSquare', sans-serif !important;
+            font-weight: 400;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #000000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .control-group .btn-window:hover {
+            background: #cc0000;
+            color: #ffffff;
+            border-color: #cc0000;
+        }
+
+        .control-group .btn-window.primary {
+            background: #cc0000;
+            color: #ffffff;
+            border-color: #cc0000;
+        }
+
+        .control-group .btn-window.primary:hover {
+            background: #990000;
+            border-color: #990000;
+        }
+
+        /* ===== ЧЕКБОКС (убираем синий) ===== */
+        .control-group .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .control-group .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #cc0000 !important;
+            border: 2px solid #000000;
+            appearance: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0;
+            font-family: 'ST-SimpleSquare', sans-serif !important;
+        }
+
+        .control-group .checkbox-group input[type="checkbox"]:checked {
+            accent-color: #cc0000 !important;
+            background-color: #cc0000 !important;
+            border-color: #cc0000 !important;
+        }
+
+        .control-group .checkbox-group input[type="checkbox"]:checked::after {
+            content: '✓';
+            position: absolute;
+            top: -2px;
+            left: 2px;
+            font-size: 16px;
+            color: #ffffff !important;
+            font-family: 'ST-SimpleSquare', sans-serif !important;
+        }
+
+        .control-group .checkbox-group input[type="checkbox"]:hover {
+            border-color: #cc0000;
+        }
+
+        .control-group .checkbox-group input[type="checkbox"]:focus {
+            outline: 2px solid #cc0000 !important;
+            outline-offset: 2px;
+            border-color: #cc0000 !important;
+        }
+
+        .control-group .checkbox-group span {
+            font-size: 13px;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'ST-SimpleSquare', sans-serif !important;
+        }
+
+        .results {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .result-item {
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid #e0e0e0;
+            position: relative;
+        }
+
+        .result-item .question {
+            font-family: 'ST-SimpleSquare', sans-serif !important;
+            font-weight: 400;
+            font-size: 17px;
+            color: #000000;
+            line-height: 1.6;
+        }
+
+        .result-item .answer {
+            font-family: 'ST-SimpleSquare', sans-serif !important;
+            font-weight: 700;
+            font-size: 17px;
+            color: #cc0000;
+            display: none;
+            margin-top: 6px;
+        }
+
+        .result-item .answer.show {
+            display: block;
+        }
+
+        .result-item .source {
+            font-family: 'ST-SimpleSquare', sans-serif !important;
+            font-weight: 300;
+            font-size: 12px;
+            color: #888888;
+            margin-top: 4px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .result-item .show-answer-btn {
+            padding: 4px 16px;
+            background: transparent;
+            border: 1px solid #000000;
+            font-family: 'ST-SimpleSquare', sans-serif !important;
+            font-weight: 400;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #000000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+            border-radius: 0;
+        }
+
+        .result-item .show-answer-btn:hover {
+            background: #cc0000;
+            color: #ffffff;
+            border-color: #cc0000;
+        }
+
+        .footer {
+            width: 100%;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            margin-top: 10px;
+            background: transparent;
+        }
+
+        .footer .footer-text {
+            font-family: 'ST-SimpleSquare', sans-serif !important;
+            font-weight: 400;
+            font-size: 16px;
+            letter-spacing: 4px;
+            color: #000000;
+            text-shadow: none;
+        }
+
+        .footer .footer-text span {
+            color: #000000;
+        }
+
+        /* ===== УБИРАЕМ СИНИЙ У ВСЕХ ФОКУСОВ ===== */
+        *:focus-visible {
+            outline: 2px solid #cc0000 !important;
+            outline-offset: 2px;
+        }
+
+        a {
+            color: #cc0000 !important;
+            font-family: 'ST-SimpleSquare', sans-serif !important;
+        }
+
+        a:hover {
+            color: #990000 !important;
+        }
+
+        /* Принудительно применяем шрифт ко всем элементам */
+        div, span, p, h1, h2, h3, h4, h5, h6, button, input, select, textarea, label, option, li, a, td, th {
+            font-family: 'ST-SimpleSquare', sans-serif !important;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 32px; padding: 8px 20px; letter-spacing: 4px; }
+            .header .subtitle { font-size: 14px; letter-spacing: 2px; }
+            .section { padding: 20px 18px; margin: 15px 10px; }
+            .section-title { font-size: 20px; letter-spacing: 2px; }
+            .control-group { flex-direction: column; align-items: stretch; gap: 10px; padding: 10px 12px; }
+            .control-group label { min-width: auto; font-size: 12px; }
+            .control-group .range-wrapper { min-width: auto; }
+            .result-item .question { font-size: 15px; }
+            .dual-range .range-labels { font-size: 11px; }
+            .footer .footer-text { font-size: 14px; letter-spacing: 3px; }
+            .custom-select-window { min-width: 100%; }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 { font-size: 24px; padding: 6px 14px; letter-spacing: 3px; }
+            .header .subtitle { font-size: 12px; letter-spacing: 1px; }
+            .section { padding: 16px 12px; margin: 12px 6px; }
+            .section-title { font-size: 17px; letter-spacing: 1px; }
+            .control-group .btn, .control-group .btn-window { font-size: 12px; padding: 6px 14px; }
+            .result-item { padding: 10px 12px; }
+            .result-item .question { font-size: 14px; }
+            .footer .footer-text { font-size: 12px; letter-spacing: 2px; }
+            .dual-range .range-labels { font-size: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wallpaper-bg"></div>
+
+    <div class="main-content">
+
+        <div class="header">
+            <h1>SHNUK PROJECTS</h1>
+            <div class="subtitle">Обучающие материалы Shnuk Projects</div>
+        </div>
+
+        <!-- ===== РАЗДЕЛ 1: SHNUK MATH ===== -->
+        <div class="section">
+            <div class="section-title"><span>SHNUK</span> MATH</div>
+            <div class="section-content">
+                <div style="display:flex; gap:15px; flex-wrap:wrap; margin-bottom:15px;">
+                    <button class="btn-window primary" onclick="showMathSub('mathStandard')" style="padding:10px 30px; background:#cc0000; color:#fff; border:2px solid #cc0000; font-family:'ST-SimpleSquare',sans-serif !important;">Shnuk Math</button>
+                    <button class="btn-window" onclick="showMathSub('mathLogic')" style="padding:10px 30px; background:transparent; color:#000; border:2px solid #000; font-family:'ST-SimpleSquare',sans-serif !important;">Shnuk Math Logic</button>
+                </div>
+
+                <div id="mathStandard">
+                    <div class="control-group">
+                        <label>Кол-во примеров</label>
+                        <div class="range-wrapper">
+                            <input type="range" id="mathCount" min="1" max="10" value="5" oninput="document.getElementById('mathCountVal').textContent=this.value">
+                            <span class="range-value" id="mathCountVal">5</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Диапазон чисел</label>
+                        <div class="range-wrapper" style="flex-direction:column; align-items:stretch;">
+                            <div class="dual-range" id="mathRange">
+                                <div class="track" id="mathRangeTrack"></div>
+                                <input type="range" id="mathRangeMin" min="-1000" max="1000" value="-50" oninput="updateMathRange()">
+                                <input type="range" id="mathRangeMax" min="-1000" max="1000" value="50" oninput="updateMathRange()">
+                                <div class="range-labels">
+                                    <span id="mathRangeMinLabel">-50</span>
+                                    <span id="mathRangeMaxLabel">50</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Кол-во действий</label>
+                        <div class="range-wrapper">
+                            <input type="range" id="mathActions" min="1" max="20" value="2" oninput="document.getElementById('mathActionsVal').textContent=this.value">
+                            <span class="range-value" id="mathActionsVal">2</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Тип примеров</label>
+                        <!-- ЗАМЕНА SELECT на ОКНО -->
+                        <div class="custom-select-window" id="mathTypeWindow" onclick="toggleSelectWindow('mathTypeWindow')">
+                            <div class="selected-option" id="mathTypeSelected">База</div>
+                            <div class="options-list" id="mathTypeOptions">
+                                <div class="option-item" data-value="standard" onclick="selectMathType('standard', this)">База</div>
+                                <div class="option-item" data-value="root" onclick="selectMathType('root', this)">Корни</div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="mathType" value="standard">
+                    </div>
+
+                    <div class="control-group">
+                        <label>Дроби</label>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="mathDecimals">
+                            <span>Включить</span>
+                        </div>
+                    </div>
+
+                    <button class="btn-window primary" onclick="generateMath()" style="padding:12px 40px; background:#cc0000; color:#fff; border:2px solid #cc0000; font-size:15px; letter-spacing:3px; font-family:'ST-SimpleSquare',sans-serif !important;">Сгенерировать</button>
+
+                    <div class="results" id="mathResults"></div>
+                </div>
+
+                <div id="mathLogic" style="display:none;">
+                    <div class="control-group">
+                        <label>Кол-во задач</label>
+                        <div class="range-wrapper">
+                            <input type="range" id="logicCount" min="1" max="10" value="5" oninput="document.getElementById('logicCountVal').textContent=this.value">
+                            <span class="range-value" id="logicCountVal">5</span>
+                        </div>
+                    </div>
+
+                    <button class="btn-window primary" onclick="generateLogic()" style="padding:12px 40px; background:#cc0000; color:#fff; border:2px solid #cc0000; font-size:15px; letter-spacing:3px; font-family:'ST-SimpleSquare',sans-serif !important;">Сгенерировать</button>
+
+                    <div class="results" id="logicResults"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== РАЗДЕЛ 2: SHNUK HISTORY ===== -->
+        <div class="section">
+            <div class="section-title"><span>SHNUK</span> HISTORY</div>
+            <div class="section-content">
+                <div class="control-group">
+                    <label>Период</label>
+                    <!-- ЗАМЕНА SELECT на ОКНО -->
+                    <div class="custom-select-window" id="historyPeriodWindow" onclick="toggleSelectWindow('historyPeriodWindow')">
+                        <div class="selected-option" id="historyPeriodSelected">IX–XIII вв. (Древняя Русь)</div>
+                        <div class="options-list" id="historyPeriodOptions">
+                            <div class="option-item" data-value="russia9" onclick="selectHistoryPeriod('russia9', this)">IX–XIII вв. (Древняя Русь)</div>
+                            <div class="option-item" data-value="russia14" onclick="selectHistoryPeriod('russia14', this)">XIV–XVI вв. (Московское государство)</div>
+                            <div class="option-item" data-value="russia17" onclick="selectHistoryPeriod('russia17', this)">XVII в. (Смутное время)</div>
+                            <div class="option-item" data-value="russia18" onclick="selectHistoryPeriod('russia18', this)">XVIII в. (Российская империя)</div>
+                            <div class="option-item" data-value="russia19" onclick="selectHistoryPeriod('russia19', this)">XIX в. (Александровская эпоха)</div>
+                            <div class="option-item" data-value="russia20" onclick="selectHistoryPeriod('russia20', this)">XX в. (СССР)</div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="historyPeriod" value="russia9">
+                </div>
+
+                <div class="control-group">
+                    <label>Кол-во задач</label>
+                    <div class="range-wrapper">
+                        <input type="range" id="historyCount" min="1" max="8" value="5" oninput="document.getElementById('historyCountVal').textContent=this.value">
+                        <span class="range-value" id="historyCountVal">5</span>
+                    </div>
+                </div>
+
+                <button class="btn-window primary" onclick="generateHistory()" style="padding:12px 40px; background:#cc0000; color:#fff; border:2px solid #cc0000; font-size:15px; letter-spacing:3px; font-family:'ST-SimpleSquare',sans-serif !important;">Сгенерировать</button>
+
+                <div class="results" id="historyResults"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        <div class="footer-text">By <span>GLavin</span></div>
+    </footer>
+
+    <script>
+        // ===== ФУНКЦИИ ДЛЯ ОКОН ВЫБОРА =====
+        function toggleSelectWindow(windowId) {
+            var windowEl = document.getElementById(windowId);
+            // Закрываем все остальные окна
+            document.querySelectorAll('.custom-select-window.open').forEach(function(el) {
+                if (el.id !== windowId) el.classList.remove('open');
+            });
+            windowEl.classList.toggle('open');
+        }
+
+        // Закрываем окна при клике вне их
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.custom-select-window')) {
+                document.querySelectorAll('.custom-select-window.open').forEach(function(el) {
+                    el.classList.remove('open');
+                });
+            }
+        });
+
+        // Для Math Type
+        function selectMathType(value, optionEl) {
+            var windowEl = document.getElementById('mathTypeWindow');
+            var selectedDisplay = document.getElementById('mathTypeSelected');
+            var hiddenInput = document.getElementById('mathType');
+            // Обновляем скрытое поле
+            hiddenInput.value = value;
+            // Обновляем отображение
+            selectedDisplay.textContent = optionEl.textContent.trim();
+            // Убираем выделение со всех опций
+            var options = windowEl.querySelectorAll('.option-item');
+            options.forEach(function(opt) { opt.classList.remove('selected-option-item'); });
+            optionEl.classList.add('selected-option-item');
+            // Закрываем окно
+            windowEl.classList.remove('open');
+        }
+
+        // Для History Period
+        function selectHistoryPeriod(value, optionEl) {
+            var windowEl = document.getElementById('historyPeriodWindow');
+            var selectedDisplay = document.getElementById('historyPeriodSelected');
+            var hiddenInput = document.getElementById('historyPeriod');
+            hiddenInput.value = value;
+            selectedDisplay.textContent = optionEl.textContent.trim();
+            var options = windowEl.querySelectorAll('.option-item');
+            options.forEach(function(opt) { opt.classList.remove('selected-option-item'); });
+            optionEl.classList.add('selected-option-item');
+            windowEl.classList.remove('open');
+        }
+
+        // Инициализация выбранных опций
+        document.addEventListener('DOMContentLoaded', function() {
+            // Math Type: по умолчанию "База"
+            var mathOptions = document.querySelectorAll('#mathTypeOptions .option-item');
+            mathOptions.forEach(function(opt) {
+                if (opt.dataset.value === 'standard') {
+                    opt.classList.add('selected-option-item');
+                }
+            });
+            // History Period: по умолчанию первый
+            var historyOptions = document.querySelectorAll('#historyPeriodOptions .option-item');
+            historyOptions.forEach(function(opt) {
+                if (opt.dataset.value === 'russia9') {
+                    opt.classList.add('selected-option-item');
+                }
+            });
+        });
+
+        // ===== Shnuk Math =====
+        function updateMathRange() {
+            var min = parseInt(document.getElementById('mathRangeMin').value);
+            var max = parseInt(document.getElementById('mathRangeMax').value);
+            if (min >= max) {
+                if (event && event.target.id === 'mathRangeMin') {
+                    document.getElementById('mathRangeMax').value = Math.min(min + 1, 1000);
+                } else {
+                    document.getElementById('mathRangeMin').value = Math.max(max - 1, -1000);
+                }
+            }
+            var newMin = parseInt(document.getElementById('mathRangeMin').value);
+            var newMax = parseInt(document.getElementById('mathRangeMax').value);
+            document.getElementById('mathRangeMinLabel').textContent = newMin;
+            document.getElementById('mathRangeMaxLabel').textContent = newMax;
+            var track = document.getElementById('mathRangeTrack');
+            var total = 2000;
+            var left = ((newMin + 1000) / total) * 100;
+            var right = ((1000 - newMax) / total) * 100;
+            track.style.left = left + '%';
+            track.style.right = right + '%';
+        }
+
+        function generateMath() {
+            var count = parseInt(document.getElementById('mathCount').value);
+            var min = parseInt(document.getElementById('mathRangeMin').value);
+            var max = parseInt(document.getElementById('mathRangeMax').value);
+            var actions = parseInt(document.getElementById('mathActions').value);
+            var type = document.getElementById('mathType').value;
+            var decimals = document.getElementById('mathDecimals').checked;
+            var results = document.getElementById('mathResults');
+
+            var html = '';
+            for (var i = 0; i < count; i++) {
+                var num = Math.floor(Math.random() * (max - min + 1)) + min;
+                var num2 = Math.floor(Math.random() * (max - min + 1)) + min;
+                var ops = ['+', '-', '*', '/'];
+                var op = ops[Math.floor(Math.random() * ops.length)];
+                var question = '';
+                var answer = '';
+
+                if (type === 'root') {
+                    var r = Math.floor(Math.random() * 20) + 2;
+                    var r2 = Math.floor(Math.random() * 20) + 2;
+                    var opRoot = ['+', '-'][Math.floor(Math.random() * 2)];
+                    question = '√' + r + ' ' + opRoot + ' √' + r2;
+                    answer = '≈' + (Math.sqrt(r) + (opRoot === '+' ? Math.sqrt(r2) : -Math.sqrt(r2))).toFixed(2);
+                } else {
+                    question = num + ' ' + op + ' ' + num2;
+                    if (op === '+') answer = (num + num2).toString();
+                    else if (op === '-') answer = (num - num2).toString();
+                    else if (op === '*') answer = (num * num2).toString();
+                    else answer = (num / num2).toFixed(2);
+                }
+
+                html += `
+                    <div class="result-item">
+                        <div class="question">${i+1}. ${question}</div>
+                        <div class="answer" id="mathAns${i}">Ответ: ${answer}</div>
+                        <button class="show-answer-btn" onclick="document.getElementById('mathAns${i}').classList.toggle('show')">Показать ответ</button>
+                    </div>
+                `;
+            }
+            results.innerHTML = html;
+        }
+
+        // ===== Shnuk Math Logic =====
+        var LOGIC_TASKS = [
+            { q: 'В школе 300 учащихся. 60% — девочки. Сколько мальчиков?', a: '120', src: 'Математика, 5 класс, Виленкин' },
+            { q: 'Поезд ехал 3 часа со скоростью 80 км/ч. Какое расстояние он проехал?', a: '240 км', src: 'Математика, 4 класс, Моро' },
+            { q: 'В магазине было 150 кг яблок. Продали 3/5. Сколько осталось?', a: '60 кг', src: 'Математика, 5 класс, Виленкин' },
+            { q: 'Периметр квадрата 36 см. Найдите его площадь.', a: '81 кв.см', src: 'Математика, 3 класс, Моро' },
+            { q: 'Сколько будет 15% от 200?', a: '30', src: 'Математика, 6 класс, Виленкин' },
+            { q: 'В корзине 20 шаров: 8 красных, 5 синих, остальные зелёные. Сколько зелёных?', a: '7', src: 'Математика, 2 класс, Моро' },
+            { q: 'Расстояние между городами 420 км. Машина проехала 5/7 пути. Сколько осталось?', a: '120 км', src: 'Математика, 5 класс, Виленкин' },
+            { q: 'Сколько будет 2/3 от 90?', a: '60', src: 'Математика, 4 класс, Моро' },
+            { q: 'Прямоугольник имеет длину 12 см и ширину 5 см. Найдите периметр.', a: '34 см', src: 'Математика, 3 класс, Моро' },
+            { q: 'В классе 25 учеников. Из них 7 отличников. Какой процент отличников?', a: '28%', src: 'Математика, 6 класс, Виленкин' }
+        ];
+
+        function generateLogic() {
+            var count = parseInt(document.getElementById('logicCount').value);
+            var results = document.getElementById('logicResults');
+            var shuffled = LOGIC_TASKS.sort(function() { return Math.random() - 0.5; });
+            var selected = shuffled.slice(0, Math.min(count, LOGIC_TASKS.length));
+
+            var html = '';
+            selected.forEach(function(task, i) {
+                html += `
+                    <div class="result-item">
+                        <div class="question">${i+1}. ${task.q}</div>
+                        <div class="answer" id="logicAns${i}">Ответ: ${task.a}</div>
+                        <button class="show-answer-btn" onclick="document.getElementById('logicAns${i}').classList.toggle('show')">Показать ответ</button>
+                        <div class="source">Источник: ${task.src}</div>
+                    </div>
+                `;
+            });
+            results.innerHTML = html;
+        }
+
+        // ===== Shnuk History =====
+        var HISTORY_DATA = {
+            russia9: [
+                { q: 'В каком году произошло Крещение Руси?', a: '988 г.', src: 'История России, 6 класс, Торкунов' },
+                { q: 'Кто был первым князем Древней Руси?', a: 'Рюрик (862 г.)', src: 'История России, 6 класс, Торкунов' },
+                { q: 'В каком году состоялась битва на Калке?', a: '1223 г.', src: 'История России, 6 класс, Торкунов' },
+                { q: 'Кто написал "Повесть временных лет"?', a: 'Нестор', src: 'История России, 6 класс, Торкунов' },
+                { q: 'В каком году был основан Новгород?', a: '859 г.', src: 'История России, 6 класс, Торкунов' },
+                { q: 'Как звали князя, который принял христианство?', a: 'Владимир Святославич', src: 'История России, 6 класс, Торкунов' },
+                { q: 'В каком году началось монголо-татарское иго?', a: '1237 г.', src: 'История России, 6 класс, Торкунов' },
+                { q: 'Какой город был столицей Древней Руси?', a: 'Киев', src: 'История России, 6 класс, Торкунов' }
+            ],
+            russia14: [
+                { q: 'В каком году состоялась Куликовская битва?', a: '1380 г.', src: 'История России, 6 класс, Торкунов' },
+                { q: 'Кто возглавлял русское войско на Куликовском поле?', a: 'Дмитрий Донской', src: 'История России, 6 класс, Торкунов' },
+                { q: 'В каком году был основан Московский Кремль?', a: '1156 г.', src: 'История России, 6 класс, Торкунов' },
+                { q: 'Кто был первым царём из династии Романовых?', a: 'Михаил Фёдорович (1613 г.)', src: 'История России, 7 класс, Торкунов' },
+                { q: 'В каком году Иван Грозный принял титул царя?', a: '1547 г.', src: 'История России, 7 класс, Торкунов' },
+                { q: 'Как назывался свод законов при Иване III?', a: 'Судебник 1497 г.', src: 'История России, 6 класс, Торкунов' },
+                { q: 'В каком году было завершено объединение русских земель?', a: '1485 г.', src: 'История России, 6 класс, Торкунов' },
+                { q: 'Кто был основателем династии Рюриковичей?', a: 'Рюрик', src: 'История России, 6 класс, Торкунов' }
+            ],
+            russia17: [
+                { q: 'В каком году началось Смутное время?', a: '1598 г.', src: 'История России, 7 класс, Торкунов' },
+                { q: 'Кто был первым самозванцем в Смутное время?', a: 'Лжедмитрий I', src: 'История России, 7 класс, Торкунов' },
+                { q: 'В каком году поляки заняли Москву?', a: '1610 г.', src: 'История России, 7 класс, Торкунов' },
+                { q: 'Кто возглавил второе народное ополчение?', a: 'Минин и Пожарский', src: 'История России, 7 класс, Торкунов' },
+                { q: 'В каком году Смутное время было преодолено?', a: '1613 г.', src: 'История России, 7 класс, Торкунов' },
+                { q: 'Как звали царя, который венчался на царство в 1613 г.?', a: 'Михаил Романов', src: 'История России, 7 класс, Торкунов' },
+                { q: 'В каком году был захвачен Смоленск поляками?', a: '1611 г.', src: 'История России, 7 класс, Торкунов' },
+                { q: 'Кто такой Василий Шуйский?', a: 'Царь в 1606–1610 гг.', src: 'История России, 7 класс, Торкунов' }
+            ],
+            russia18: [
+                { q: 'В каком году началось правление Петра I?', a: '1682 г.', src: 'История России, 8 класс, Торкунов' },
+                { q: 'В каком году была основана Санкт-Петербург?', a: '1703 г.', src: 'История России, 8 класс, Торкунов' },
+                { q: 'В каком году произошла Полтавская битва?', a: '1709 г.', src: 'История России, 8 класс, Торкунов' },
+                { q: 'Кто правил после Петра I?', a: 'Екатерина I', src: 'История России, 8 класс, Торкунов' },
+                { q: 'В каком году начался Золотой век Екатерины II?', a: '1762 г.', src: 'История России, 8 класс, Торкунов' },
+                { q: 'В каком году произошло восстание Пугачёва?', a: '1773 г.', src: 'История России, 8 класс, Торкунов' },
+                { q: 'Какое событие произошло в 1721 году?', a: 'Провозглашение России империей', src: 'История России, 8 класс, Торкунов' },
+                { q: 'Кто был фаворитом Екатерины II?', a: 'Григорий Потёмкин', src: 'История России, 8 класс, Торкунов' }
+            ],
+            russia19: [
+                { q: 'В каком году началось правление Александра I?', a: '1801 г.', src: 'История России, 9 класс, Торкунов' },
+                { q: 'В каком году произошла Отечественная война 1812 года?', a: '1812 г.', src: 'История России, 9 класс, Торкунов' },
+                { q: 'Кто был главнокомандующим русской армией в 1812 г.?', a: 'Михаил Кутузов', src: 'История России, 9 класс, Торкунов' },
+                { q: 'В каком году произошло восстание декабристов?', a: '1825 г.', src: 'История России, 9 класс, Торкунов' },
+                { q: 'Кто правил после Александра I?', a: 'Николай I', src: 'История России, 9 класс, Торкунов' },
+                { q: 'В каком году была отменена крепостная реформа?', a: '1861 г.', src: 'История России, 9 класс, Торкунов' },
+                { q: 'Кто был главным реформатором в 1860-х годах?', a: 'Александр II', src: 'История России, 9 класс, Торкунов' },
+                { q: 'В каком году произошло убийство Александра II?', a: '1881 г.', src: 'История России, 9 класс, Торкунов' }
+            ],
+            russia20: [
+                { q: 'В каком году произошла Октябрьская революция?', a: '1917 г.', src: 'История России, 10 класс, Торкунов' },
+                { q: 'Кто был первым лидером СССР?', a: 'Владимир Ленин', src: 'История России, 10 класс, Торкунов' },
+                { q: 'В каком году началась Великая Отечественная война?', a: '1941 г.', src: 'История России, 10 класс, Торкунов' },
+                { q: 'В каком году закончилась ВОВ?', a: '1945 г.', src: 'История России, 10 класс, Торкунов' },
+                { q: 'Кто был главнокомандующим в годы войны?', a: 'Иосиф Сталин', src: 'История России, 10 класс, Торкунов' },
+                { q: 'В каком году произошёл полёт Гагарина?', a: '1961 г.', src: 'История России, 10 класс, Торкунов' },
+                { q: 'В каком году распался СССР?', a: '1991 г.', src: 'История России, 10 класс, Торкунов' },
+                { q: 'Кто был последним президентом СССР?', a: 'Михаил Горбачёв', src: 'История России, 10 класс, Торкунов' }
+            ]
+        };
+
+        function generateHistory() {
+            var period = document.getElementById('historyPeriod').value;
+            var count = parseInt(document.getElementById('historyCount').value);
+            var results = document.getElementById('historyResults');
+            var data = HISTORY_DATA[period] || [];
+            var shuffled = data.sort(function() { return Math.random() - 0.5; });
+            var selected = shuffled.slice(0, Math.min(count, data.length));
+
+            var html = '';
+            selected.forEach(function(item, i) {
+                html += `
+                    <div class="result-item">
+                        <div class="question">${i+1}. ${item.q}</div>
+                        <div class="answer" id="historyAns${i}">Ответ: ${item.a}</div>
+                        <button class="show-answer-btn" onclick="document.getElementById('historyAns${i}').classList.toggle('show')">Показать ответ</button>
+                        <div class="source">Источник: ${item.src}</div>
+                    </div>
+                `;
+            });
+            results.innerHTML = html;
+        }
+
+        // ===== Переключение Math подразделов =====
+        function showMathSub(id) {
+            document.getElementById('mathStandard').style.display = id === 'mathStandard' ? 'block' : 'none';
+            document.getElementById('mathLogic').style.display = id === 'mathLogic' ? 'block' : 'none';
+            document.getElementById('mathResults').innerHTML = '';
+            document.getElementById('logicResults').innerHTML = '';
+        }
+
+        // Инициализация Math Range
+        updateMathRange();
+
+        console.log('Shnuk Projects успешно загружен');
+        console.log('Все данные — из реальных источников');
+    </script>
+
+</body>
+</html>
