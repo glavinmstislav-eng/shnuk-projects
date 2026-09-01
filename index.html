@@ -1641,6 +1641,8 @@
         function generateLogic() {
             var count = parseInt(document.getElementById('logicCount').value);
             var results = document.getElementById('logicResults');
+            
+            // Перемешиваем и берём ровно столько, сколько указано в ползунке
             var shuffled = LOGIC_TASKS.sort(function() { return Math.random() - 0.5; });
             var selected = shuffled.slice(0, Math.min(count, LOGIC_TASKS.length));
 
@@ -1727,6 +1729,8 @@
             var count = parseInt(document.getElementById('historyCount').value);
             var results = document.getElementById('historyResults');
             var data = HISTORY_DATA[period] || [];
+            
+            // Перемешиваем и берём ровно столько, сколько указано в ползунке
             var shuffled = data.sort(function() { return Math.random() - 0.5; });
             var selected = shuffled.slice(0, Math.min(count, data.length));
 
