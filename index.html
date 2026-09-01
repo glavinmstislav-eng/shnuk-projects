@@ -31,47 +31,6 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
         }
 
-        /* ===== КУРСОР ===== */
-        @media (hover: hover) and (pointer: fine) {
-            body.hide-cursor * {
-                cursor: none !important;
-            }
-
-            #customCursor {
-                position: fixed;
-                pointer-events: none;
-                z-index: 99999;
-                width: 32px;
-                height: 32px;
-                background-image: url('cursor.png');
-                background-size: contain;
-                background-repeat: no-repeat;
-                background-position: center;
-                transform: translate(0, 0);
-                transition: none;
-                display: none;
-                image-rendering: auto;
-            }
-
-            body.show-custom-cursor #customCursor {
-                display: block;
-            }
-
-            #customCursor.hover {
-                transform: scale(1.1);
-                filter: brightness(1.2);
-            }
-        }
-
-        @media (hover: none) and (pointer: coarse) {
-            #customCursor {
-                display: none !important;
-            }
-            body.hide-cursor * {
-                cursor: auto !important;
-            }
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -968,7 +927,6 @@
             .footer .footer-text { font-size: 14px; letter-spacing: 3px; }
             .custom-select-window { min-width: 100%; }
             .toggle-switch .toggle-label { font-size: 12px; }
-            #customCursor { width: 24px; height: 24px; }
             .modal { padding: 20px; }
             .top-bar { padding: 5px 10px; }
             .avatar-btn { width: 40px; height: 40px; }
@@ -987,17 +945,13 @@
             .toggle-switch input[type="checkbox"] { width: 36px; height: 18px; }
             .toggle-switch input[type="checkbox"]::after { width: 14px; height: 14px; }
             .toggle-switch input[type="checkbox"]:checked::after { transform: translateX(18px); }
-            #customCursor { width: 20px; height: 20px; }
             .modal { padding: 15px; }
             .avatar-btn { width: 36px; height: 36px; }
             .modal .tab-btn { font-size: 10px; padding: 6px 8px; }
         }
     </style>
 </head>
-<body class="hide-cursor show-custom-cursor">
-
-    <!-- ===== КАСТОМНЫЙ КУРСОР ===== -->
-    <div id="customCursor"></div>
+<body>
 
     <div class="wallpaper-bg"></div>
 
@@ -1166,16 +1120,8 @@
                         <span class="toggle-label active" id="fontToggleLabel">ST SimpleSquare</span>
                     </div>
                 </div>
-                <div class="control-group">
-                    <label>Курсор</label>
-                    <div class="toggle-switch">
-                        <input type="checkbox" id="cursorToggle" checked onchange="toggleCursor()">
-                        <span class="toggle-label active" id="cursorToggleLabel">Кастомный</span>
-                    </div>
-                </div>
                 <div style="font-size:13px; color:#666; letter-spacing:0.5px; padding:0 16px 8px;">
-                    Переключение между фирменным шрифтом ST SimpleSquare и системным шрифтом.<br>
-                    Переключение между кастомным курсором и системным курсором (только для ПК).
+                    Переключение между фирменным шрифтом ST SimpleSquare и системным шрифтом.
                 </div>
             </div>
         </div>
@@ -1261,7 +1207,6 @@
                     accountData = JSON.parse(data);
                     updateAvatarUI();
                 } else {
-                    // Если аккаунта нет — открываем модалку при первом запуске
                     if (!localStorage.getItem('shnuk_first_visit_done')) {
                         setTimeout(function() {
                             openAccountModal();
@@ -1360,7 +1305,6 @@
                 btn.innerHTML = '<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M12 14c-4 0-7 2-7 4v2h14v-2c0-2-3-4-7-4z"/></svg>';
             }
 
-            // Заполняем поля в модалке
             if (accountData) {
                 document.getElementById('accountLogin').value = accountData.login || '';
                 document.getElementById('accountPassword').value = accountData.password || '';
@@ -1388,7 +1332,6 @@
             document.getElementById('accountModal').classList.remove('active');
         }
 
-        // Закрытие по клику на фон
         document.getElementById('accountModal').addEventListener('click', function(e) {
             if (e.target === this) closeAccountModal();
         });
@@ -1494,7 +1437,6 @@
                         }
                     }
                     
-                    // Перезагружаем аккаунт
                     loadAccount();
                     refreshDataViewer();
                     
@@ -1527,105 +1469,9 @@
                 label.classList.remove('active');
             }
             
-            // Сохраняем настройку
             try {
                 localStorage.setItem('shnuk_font', checkbox.checked ? 'custom' : 'system');
             } catch(e) {}
-        }
-
-        // ===== ПЕРЕКЛЮЧЕНИЕ КУРСОРА =====
-        function toggleCursor() {
-            if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) {
-                return;
-            }
-
-            var checkbox = document.getElementById('cursorToggle');
-            var label = document.getElementById('cursorToggleLabel');
-            var body = document.body;
-
-            if (checkbox.checked) {
-                body.classList.add('hide-cursor');
-                body.classList.add('show-custom-cursor');
-                label.textContent = 'Кастомный';
-                label.classList.add('active');
-                enableCustomCursor(true);
-            } else {
-                body.classList.remove('hide-cursor');
-                body.classList.remove('show-custom-cursor');
-                label.textContent = 'Системный';
-                label.classList.remove('active');
-                enableCustomCursor(false);
-            }
-            
-            try {
-                localStorage.setItem('shnuk_cursor', checkbox.checked ? 'custom' : 'system');
-            } catch(e) {}
-        }
-
-        // ===== КАСТОМНЫЙ КУРСОР =====
-        var cursorEnabled = true;
-        var cursorElement = document.getElementById('customCursor');
-        var isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-
-        function enableCustomCursor(enable) {
-            if (!isDesktop) return;
-            cursorEnabled = enable;
-            if (!enable) {
-                cursorElement.style.display = 'none';
-                return;
-            }
-            if (document.body.classList.contains('show-custom-cursor')) {
-                cursorElement.style.display = 'block';
-            }
-        }
-
-        if (cursorElement && isDesktop) {
-            var posX = 0, posY = 0;
-
-            function updateCursor(e) {
-                if (!cursorEnabled || !isDesktop) return;
-                posX = e.clientX;
-                posY = e.clientY;
-                cursorElement.style.left = posX + 'px';
-                cursorElement.style.top = posY + 'px';
-            }
-
-            function addHoverEffect() {
-                var interactiveElements = document.querySelectorAll(
-                    'a, button, .btn-window, .show-answer-btn, .custom-select-window, .option-item, .toggle-switch, input[type="range"], input[type="checkbox"], .checkbox-group'
-                );
-
-                interactiveElements.forEach(function(el) {
-                    el.addEventListener('mouseenter', function() {
-                        if (cursorEnabled && isDesktop) cursorElement.classList.add('hover');
-                    });
-                    el.addEventListener('mouseleave', function() {
-                        if (cursorEnabled && isDesktop) cursorElement.classList.remove('hover');
-                    });
-                });
-            }
-
-            document.addEventListener('mousemove', updateCursor);
-
-            document.addEventListener('mouseleave', function() {
-                if (cursorEnabled && isDesktop) cursorElement.style.display = 'none';
-            });
-            document.addEventListener('mouseenter', function() {
-                if (cursorEnabled && isDesktop && document.body.classList.contains('show-custom-cursor')) {
-                    cursorElement.style.display = 'block';
-                }
-            });
-
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', addHoverEffect);
-            } else {
-                addHoverEffect();
-            }
-
-            var observer = new MutationObserver(function() {
-                addHoverEffect();
-            });
-            observer.observe(document.body, { childList: true, subtree: true });
         }
 
         // ===== ФУНКЦИИ ДЛЯ ОКОН ВЫБОРА =====
@@ -1682,24 +1528,16 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Загружаем аккаунт
             loadAccount();
             
-            // Восстанавливаем настройки
             try {
                 var fontSetting = localStorage.getItem('shnuk_font');
                 if (fontSetting === 'system') {
                     document.getElementById('fontToggle').checked = false;
                     toggleFont();
                 }
-                var cursorSetting = localStorage.getItem('shnuk_cursor');
-                if (cursorSetting === 'system') {
-                    document.getElementById('cursorToggle').checked = false;
-                    toggleCursor();
-                }
             } catch(e) {}
 
-            // Инициализация окон выбора
             var mathOptions = document.querySelectorAll('#mathTypeOptions .option-item');
             mathOptions.forEach(function(opt) {
                 if (opt.dataset.value === 'standard') {
@@ -1718,18 +1556,6 @@
                     opt.classList.add('selected-option-item');
                 }
             });
-
-            // На мобильных устройствах отключаем переключатель курсора
-            if (!isDesktop) {
-                var cursorToggle = document.getElementById('cursorToggle');
-                var cursorLabel = document.getElementById('cursorToggleLabel');
-                if (cursorToggle) {
-                    cursorToggle.checked = false;
-                    cursorToggle.disabled = true;
-                    cursorLabel.textContent = 'Только для ПК';
-                    cursorLabel.classList.remove('active');
-                }
-            }
         });
 
         // ===== Shnuk Math =====
@@ -2025,7 +1851,6 @@
 
         console.log('Shnuk Projects успешно загружен');
         console.log('Все данные — из реальных источников, ответы проверены');
-        console.log('Кастомный курсор активен только на ПК');
     </script>
 
 </body>
