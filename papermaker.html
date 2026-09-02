@@ -1,0 +1,1702 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="yandex" content="noindex, nofollow">
+    <title>Shnuk Papermaker</title>
+    
+    <style>
+        @font-face {
+            font-family: 'ST-SimpleSquare';
+            src: url('ST-SimpleSquare.ttf') format('truetype');
+            font-weight: 400;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+            background: #f0f0f0;
+            user-select: none;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .wallpaper-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background-image: url('wallpaper.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            opacity: 0.2;
+        }
+
+        .main-content {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.95);
+            margin-bottom: 30px;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #cc0000;
+        }
+
+        .header h1 span {
+            color: #000000;
+        }
+
+        .back-btn {
+            padding: 8px 20px;
+            background: #ffffff;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #000000;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .back-btn:hover {
+            background: #cc0000;
+            color: #ffffff;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .header-actions button {
+            padding: 8px 16px;
+            background: #ffffff;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #000000;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .header-actions button:hover {
+            background: #cc0000;
+            color: #ffffff;
+        }
+
+        .header-actions button.primary {
+            background: #cc0000;
+            color: #ffffff;
+        }
+
+        .header-actions button.primary:hover {
+            background: #990000;
+        }
+
+        /* ===== ГЛАВНЫЙ ЭКРАН ===== */
+        #mainScreen {
+            display: block;
+        }
+
+        .create-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            text-align: center;
+            max-width: 600px;
+            margin: 60px auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .create-section h2 {
+            font-size: 28px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+
+        .create-section h2 span {
+            color: #cc0000;
+        }
+
+        .create-section p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .create-section input[type="text"] {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 16px;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            background: #ffffff;
+            color: #000;
+            margin-bottom: 15px;
+            font-family: inherit;
+        }
+
+        .create-section input[type="text"]:focus {
+            outline: 2px solid #cc0000;
+        }
+
+        .create-section .btn-create {
+            padding: 12px 50px;
+            background: #cc0000;
+            color: #ffffff;
+            font-size: 16px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .create-section .btn-create:hover {
+            background: #990000;
+        }
+
+        /* ===== СПИСОК ПРЕЗЕНТАЦИЙ ===== */
+        .presentations-list {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .presentations-list h3 {
+            font-size: 18px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #000000;
+            margin-bottom: 15px;
+        }
+
+        .presentations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .presentation-card {
+            background: #ffffff;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .presentation-card:hover {
+            box-shadow: 0 4px 16px rgba(204,0,0,0.12);
+        }
+
+        .presentation-card .card-title {
+            font-weight: 700;
+            font-size: 16px;
+            color: #000000;
+            margin-bottom: 5px;
+        }
+
+        .presentation-card .card-info {
+            font-size: 12px;
+            color: #888;
+            letter-spacing: 1px;
+        }
+
+        .presentation-card .card-actions {
+            margin-top: 10px;
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .presentation-card .card-actions button {
+            padding: 4px 12px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            background: #f0f0f0;
+            transition: all 0.3s ease;
+        }
+
+        .presentation-card .card-actions button:hover {
+            background: #cc0000;
+            color: #ffffff;
+        }
+
+        .presentation-card .card-actions button.danger:hover {
+            background: #cc0000;
+            color: #ffffff;
+        }
+
+        /* ===== РЕДАКТОР ===== */
+        #editorScreen {
+            display: none;
+        }
+
+        .editor-toolbar {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .editor-toolbar .presentation-name {
+            font-weight: 700;
+            font-size: 18px;
+            color: #cc0000;
+            margin-right: 20px;
+        }
+
+        .editor-toolbar button {
+            padding: 6px 16px;
+            background: #ffffff;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #000000;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .editor-toolbar button:hover {
+            background: #cc0000;
+            color: #ffffff;
+        }
+
+        .editor-toolbar button.primary {
+            background: #cc0000;
+            color: #ffffff;
+        }
+
+        .editor-toolbar button.primary:hover {
+            background: #990000;
+        }
+
+        .editor-toolbar .slide-counter {
+            font-size: 14px;
+            color: #666;
+            margin-left: auto;
+            letter-spacing: 1px;
+        }
+
+        .editor-body {
+            display: flex;
+            gap: 20px;
+            min-height: 70vh;
+        }
+
+        /* ===== СЛАЙДЫ ===== */
+        .slides-sidebar {
+            width: 200px;
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            max-height: 70vh;
+            overflow-y: auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .slides-sidebar .slide-thumb {
+            padding: 10px;
+            margin-bottom: 10px;
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 2px solid transparent;
+        }
+
+        .slides-sidebar .slide-thumb:hover {
+            border-color: #cc0000;
+        }
+
+        .slides-sidebar .slide-thumb.active {
+            border-color: #cc0000;
+            background: rgba(204,0,0,0.05);
+        }
+
+        .slides-sidebar .slide-thumb .thumb-actions {
+            margin-top: 6px;
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+        }
+
+        .slides-sidebar .slide-thumb .thumb-actions button {
+            padding: 2px 10px;
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            background: #f0f0f0;
+            transition: all 0.3s ease;
+        }
+
+        .slides-sidebar .slide-thumb .thumb-actions button:hover {
+            background: #cc0000;
+            color: #ffffff;
+        }
+
+        .slides-sidebar .add-slide-btn {
+            width: 100%;
+            padding: 10px;
+            background: #cc0000;
+            color: #ffffff;
+            border: none;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slides-sidebar .add-slide-btn:hover {
+            background: #990000;
+        }
+
+        /* ===== РАБОЧАЯ ОБЛАСТЬ ===== */
+        .slide-editor {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            min-height: 70vh;
+            position: relative;
+        }
+
+        .slide-editor .slide-canvas {
+            width: 100%;
+            min-height: 500px;
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide-editor .slide-canvas .object {
+            position: absolute;
+            cursor: move;
+            min-width: 20px;
+            min-height: 20px;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 2px solid transparent;
+            transition: border-color 0.2s ease;
+        }
+
+        .slide-editor .slide-canvas .object:hover {
+            border-color: #cc0000;
+        }
+
+        .slide-editor .slide-canvas .object.selected {
+            border-color: #cc0000;
+            box-shadow: 0 0 0 2px #cc0000;
+        }
+
+        .slide-editor .slide-canvas .object.text-object {
+            background: transparent;
+            box-shadow: none;
+            border: 2px dashed transparent;
+            padding: 4px 8px;
+        }
+
+        .slide-editor .slide-canvas .object.text-object:hover,
+        .slide-editor .slide-canvas .object.text-object.selected {
+            border-color: #cc0000;
+            background: rgba(204,0,0,0.03);
+        }
+
+        .slide-editor .slide-canvas .object.image-object img {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            pointer-events: none;
+        }
+
+        .slide-editor .slide-canvas .object .resize-handle {
+            position: absolute;
+            bottom: -6px;
+            right: -6px;
+            width: 12px;
+            height: 12px;
+            background: #cc0000;
+            cursor: nw-resize;
+            display: none;
+        }
+
+        .slide-editor .slide-canvas .object.selected .resize-handle {
+            display: block;
+        }
+
+        .slide-editor .slide-canvas .object .delete-object {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 20px;
+            height: 20px;
+            background: #cc0000;
+            color: #ffffff;
+            border: none;
+            border-radius: 50%;
+            font-size: 14px;
+            cursor: pointer;
+            display: none;
+            line-height: 20px;
+            text-align: center;
+        }
+
+        .slide-editor .slide-canvas .object.selected .delete-object {
+            display: block;
+        }
+
+        /* ===== ПАНЕЛЬ ОБЪЕКТОВ ===== */
+        .objects-panel {
+            width: 200px;
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .objects-panel h4 {
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+
+        .objects-panel .object-btn {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 8px;
+            background: #ffffff;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #000000;
+            text-align: center;
+        }
+
+        .objects-panel .object-btn:hover {
+            background: #cc0000;
+            color: #ffffff;
+        }
+
+        .objects-panel .object-properties {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .objects-panel .object-properties label {
+            display: block;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 4px;
+            margin-top: 10px;
+        }
+
+        .objects-panel .object-properties input[type="text"],
+        .objects-panel .object-properties input[type="number"],
+        .objects-panel .object-properties input[type="file"] {
+            width: 100%;
+            padding: 6px 10px;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            font-size: 13px;
+            background: #ffffff;
+            color: #000;
+            font-family: inherit;
+        }
+
+        .objects-panel .object-properties input[type="file"] {
+            padding: 4px;
+        }
+
+        .objects-panel .object-properties input:focus {
+            outline: 2px solid #cc0000;
+        }
+
+        .objects-panel .object-properties .font-upload {
+            margin-top: 5px;
+        }
+
+        /* ===== МОДАЛЬНОЕ ОКНО ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: #ffffff;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px 35px;
+            position: relative;
+            border: none;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #000;
+            background: none;
+            border: none;
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: #cc0000;
+        }
+
+        .modal h2 {
+            font-weight: 700;
+            font-size: 24px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #000000;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .modal h2 span {
+            color: #cc0000;
+        }
+
+        .modal .btn-primary {
+            width: 100%;
+            padding: 12px;
+            background: #cc0000;
+            color: #ffffff;
+            border: none;
+            font-size: 16px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .modal .btn-primary:hover {
+            background: #990000;
+        }
+
+        .modal .btn-secondary {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            color: #000;
+            border: none;
+            box-shadow: 0 0 0 2px #000;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+        }
+
+        .modal .btn-secondary:hover {
+            background: #000;
+            color: #fff;
+        }
+
+        .modal .btn-danger {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            color: #cc0000;
+            border: none;
+            box-shadow: 0 0 0 2px #cc0000;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+        }
+
+        .modal .btn-danger:hover {
+            background: #cc0000;
+            color: #fff;
+        }
+
+        .modal .data-viewer {
+            background: #f5f5f5;
+            padding: 12px;
+            font-size: 12px;
+            max-height: 200px;
+            overflow: auto;
+            border: none;
+            white-space: pre-wrap;
+            word-break: break-all;
+            font-family: monospace;
+            margin-top: 10px;
+        }
+
+        .modal .backup-info {
+            font-size: 13px;
+            color: #666;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .modal .error-text {
+            color: #cc0000;
+            font-size: 13px;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .modal .success-text {
+            color: #00aa00;
+            font-size: 13px;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .modal .form-group {
+            margin-bottom: 18px;
+        }
+
+        .modal .form-group label {
+            display: block;
+            font-weight: 400;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .modal .form-group input[type="file"] {
+            width: 100%;
+            padding: 10px 14px;
+            border: none;
+            font-size: 14px;
+            background: #ffffff;
+            color: #000;
+        }
+
+        .modal .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .modal .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #cc0000;
+            cursor: pointer;
+        }
+
+        .modal .checkbox-group label {
+            font-size: 13px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .header { flex-direction: column; gap: 10px; padding: 15px; }
+            .header-actions { justify-content: center; }
+            .editor-body { flex-direction: column; }
+            .slides-sidebar { width: 100%; max-height: 200px; flex-direction: row; overflow-x: auto; display: flex; gap: 10px; }
+            .slides-sidebar .slide-thumb { min-width: 120px; }
+            .objects-panel { width: 100%; max-height: 200px; }
+            .slide-editor .slide-canvas { min-height: 300px; }
+            .editor-toolbar { flex-wrap: wrap; }
+            .editor-toolbar .slide-counter { margin-left: 0; width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wallpaper-bg"></div>
+
+    <div class="main-content">
+
+        <!-- ===== HEADER ===== -->
+        <div class="header">
+            <div class="header-left">
+                <button class="back-btn" onclick="goHome()">← Назад</button>
+                <h1><span>SHNUK</span> PAPERMAKER</h1>
+            </div>
+            <div class="header-actions">
+                <button onclick="openBackupModal()">Бекап</button>
+                <button onclick="clearAllData()" style="color:#cc0000;">Очистить</button>
+            </div>
+        </div>
+
+        <!-- ===== ГЛАВНЫЙ ЭКРАН ===== -->
+        <div id="mainScreen">
+            <div class="create-section">
+                <h2>СОЗДАТЬ <span>ПРЕЗЕНТАЦИЮ</span></h2>
+                <p>Введите название презентации и начните работу</p>
+                <input type="text" id="presentationNameInput" placeholder="Название презентации..." onkeydown="if(event.key==='Enter') createPresentation()">
+                <button class="btn-create" onclick="createPresentation()">Создать</button>
+            </div>
+
+            <div class="presentations-list" id="presentationsList">
+                <h3>Мои презентации</h3>
+                <div class="presentations-grid" id="presentationsGrid"></div>
+            </div>
+        </div>
+
+        <!-- ===== РЕДАКТОР ===== -->
+        <div id="editorScreen">
+            <div class="editor-toolbar">
+                <span class="presentation-name" id="editorPresentationName">Название</span>
+                <button onclick="addSlide()">+ Слайд</button>
+                <button onclick="exportPDF()">PDF</button>
+                <button onclick="exportPNG()">PNG</button>
+                <button onclick="printSlides()">Печать</button>
+                <span class="slide-counter" id="slideCounter">Слайд 1 из 1</span>
+            </div>
+
+            <div class="editor-body">
+                <!-- Слайды -->
+                <div class="slides-sidebar" id="slidesSidebar">
+                    <div id="slidesList"></div>
+                    <button class="add-slide-btn" onclick="addSlide()">+ Добавить слайд</button>
+                </div>
+
+                <!-- Редактор -->
+                <div class="slide-editor">
+                    <div class="slide-canvas" id="slideCanvas">
+                        <!-- Объекты будут добавляться сюда -->
+                    </div>
+                </div>
+
+                <!-- Панель объектов -->
+                <div class="objects-panel">
+                    <h4>Объекты</h4>
+                    <button class="object-btn" onclick="addTextObject()">Текст</button>
+                    <button class="object-btn" onclick="addImageObject()">Фото</button>
+
+                    <div class="object-properties" id="objectProperties">
+                        <label>Свойства объекта</label>
+                        <div style="font-size:13px; color:#888; text-align:center; padding:10px 0;">
+                            Выберите объект на слайде
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ===== МОДАЛЬНОЕ ОКНО БЕКАПА ===== -->
+    <div class="modal-overlay" id="backupModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeBackupModal()">×</button>
+            <h2><span>SHNUK</span> БЕКАП</h2>
+            <div class="backup-info">
+                Бекап сохраняет все презентации и данные.
+                <br>Формат файла: <strong>.shnuk</strong>
+            </div>
+            <button class="btn-primary" onclick="createBackup()">Скачать бекап (.shnuk)</button>
+            <div style="margin-top:15px; border-top:1px solid #ddd; padding-top:15px;">
+                <label style="font-size:13px; letter-spacing:1px; text-transform:uppercase; display:block; margin-bottom:10px;">Восстановить из бекапа</label>
+                <input type="file" id="backupInput" accept=".shnuk" style="width:100%; padding:8px; background:#fff; border:none; box-shadow:0 0 0 2px #000;" onchange="restoreBackup(event)">
+            </div>
+            <div class="error-text" id="backupError"></div>
+            <div class="success-text" id="backupSuccess"></div>
+            <button class="btn-secondary" onclick="refreshDataViewer()" style="margin-top:10px;">Посмотреть данные</button>
+            <div class="data-viewer" id="dataViewer" style="display:none;"></div>
+        </div>
+    </div>
+
+    <script>
+        // ===== СОСТОЯНИЕ =====
+        let presentations = [];
+        let currentPresentationId = null;
+        let currentSlideIndex = 0;
+        let selectedObjectId = null;
+        let dragData = null;
+        let nextObjectId = 1;
+
+        // ===== ЗАГРУЗКА =====
+        function loadData() {
+            try {
+                const data = localStorage.getItem('shnuk_papermaker_data');
+                if (data) {
+                    const parsed = JSON.parse(data);
+                    presentations = parsed.presentations || [];
+                    nextObjectId = parsed.nextObjectId || 1;
+                }
+            } catch(e) {
+                presentations = [];
+            }
+            renderPresentations();
+        }
+
+        function saveData() {
+            try {
+                localStorage.setItem('shnuk_papermaker_data', JSON.stringify({
+                    presentations: presentations,
+                    nextObjectId: nextObjectId
+                }));
+            } catch(e) {}
+        }
+
+        // ===== ГЛАВНЫЙ ЭКРАН =====
+        function renderPresentations() {
+            const grid = document.getElementById('presentationsGrid');
+            if (presentations.length === 0) {
+                grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; color:#888; padding:20px;">Нет презентаций. Создайте первую!</div>';
+                return;
+            }
+            grid.innerHTML = presentations.map((p, idx) => `
+                <div class="presentation-card">
+                    <div class="card-title">${p.name}</div>
+                    <div class="card-info">${p.slides ? p.slides.length : 0} слайдов</div>
+                    <div class="card-actions">
+                        <button onclick="openPresentation(${idx})">Открыть</button>
+                        <button class="danger" onclick="deletePresentation(${idx})">✕</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function createPresentation() {
+            const input = document.getElementById('presentationNameInput');
+            const name = input.value.trim();
+            if (!name) {
+                alert('Введите название презентации');
+                return;
+            }
+
+            const presentation = {
+                id: Date.now() + '_' + Math.random().toString(36).substr(2, 6),
+                name: name,
+                slides: [{
+                    objects: []
+                }],
+                createdAt: new Date().toISOString()
+            };
+
+            presentations.push(presentation);
+            saveData();
+            renderPresentations();
+            input.value = '';
+            openPresentation(presentations.length - 1);
+        }
+
+        function deletePresentation(index) {
+            if (!confirm(`Удалить презентацию "${presentations[index].name}"?`)) return;
+            presentations.splice(index, 1);
+            saveData();
+            renderPresentations();
+            if (currentPresentationId !== null) {
+                document.getElementById('mainScreen').style.display = 'block';
+                document.getElementById('editorScreen').style.display = 'none';
+                currentPresentationId = null;
+            }
+        }
+
+        function openPresentation(index) {
+            currentPresentationId = index;
+            currentSlideIndex = 0;
+            selectedObjectId = null;
+            document.getElementById('mainScreen').style.display = 'none';
+            document.getElementById('editorScreen').style.display = 'block';
+            renderEditor();
+        }
+
+        function goHome() {
+            document.getElementById('mainScreen').style.display = 'block';
+            document.getElementById('editorScreen').style.display = 'none';
+            currentPresentationId = null;
+            currentSlideIndex = 0;
+            selectedObjectId = null;
+            renderPresentations();
+        }
+
+        // ===== РЕДАКТОР =====
+        function getCurrentPresentation() {
+            if (currentPresentationId === null || currentPresentationId >= presentations.length) return null;
+            return presentations[currentPresentationId];
+        }
+
+        function getCurrentSlide() {
+            const p = getCurrentPresentation();
+            if (!p || !p.slides || currentSlideIndex >= p.slides.length) return null;
+            return p.slides[currentSlideIndex];
+        }
+
+        function renderEditor() {
+            const p = getCurrentPresentation();
+            if (!p) return;
+
+            document.getElementById('editorPresentationName').textContent = p.name;
+            document.getElementById('slideCounter').textContent = `Слайд ${currentSlideIndex + 1} из ${p.slides.length}`;
+
+            renderSlidesList();
+            renderSlide();
+            renderProperties();
+        }
+
+        // ===== СЛАЙДЫ =====
+        function renderSlidesList() {
+            const p = getCurrentPresentation();
+            if (!p) return;
+
+            const container = document.getElementById('slidesList');
+            container.innerHTML = p.slides.map((slide, idx) => `
+                <div class="slide-thumb ${idx === currentSlideIndex ? 'active' : ''}" onclick="selectSlide(${idx})">
+                    Слайд ${idx + 1}
+                    <div class="thumb-actions">
+                        <button onclick="event.stopPropagation(); deleteSlide(${idx})">✕</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function addSlide() {
+            const p = getCurrentPresentation();
+            if (!p) return;
+
+            p.slides.push({ objects: [] });
+            currentSlideIndex = p.slides.length - 1;
+            selectedObjectId = null;
+            saveData();
+            renderEditor();
+        }
+
+        function deleteSlide(index) {
+            const p = getCurrentPresentation();
+            if (!p || p.slides.length <= 1) {
+                alert('Нельзя удалить единственный слайд');
+                return;
+            }
+            if (!confirm(`Удалить слайд ${index + 1}?`)) return;
+
+            p.slides.splice(index, 1);
+            if (currentSlideIndex >= p.slides.length) currentSlideIndex = p.slides.length - 1;
+            if (currentSlideIndex === index && index > 0) currentSlideIndex--;
+            selectedObjectId = null;
+            saveData();
+            renderEditor();
+        }
+
+        function selectSlide(index) {
+            currentSlideIndex = index;
+            selectedObjectId = null;
+            renderEditor();
+        }
+
+        // ===== СЛАЙД (холст) =====
+        function renderSlide() {
+            const slide = getCurrentSlide();
+            if (!slide) return;
+
+            const canvas = document.getElementById('slideCanvas');
+            canvas.innerHTML = '';
+
+            slide.objects.forEach(obj => {
+                const el = document.createElement('div');
+                el.className = `object ${obj.type === 'text' ? 'text-object' : 'image-object'}`;
+                if (obj.id === selectedObjectId) el.classList.add('selected');
+                el.dataset.id = obj.id;
+
+                // Позиция
+                el.style.left = (obj.x || 0) + 'px';
+                el.style.top = (obj.y || 0) + 'px';
+                if (obj.width) el.style.width = obj.width + 'px';
+                if (obj.height) el.style.height = obj.height + 'px';
+                if (obj.fontSize) el.style.fontSize = obj.fontSize + 'px';
+                if (obj.fontFamily) el.style.fontFamily = obj.fontFamily;
+                if (obj.color) el.style.color = obj.color;
+
+                if (obj.type === 'text') {
+                    el.textContent = obj.content || 'Текст';
+                    el.contentEditable = true;
+                    el.addEventListener('input', function(e) {
+                        updateObjectContent(obj.id, this.textContent);
+                    });
+                } else if (obj.type === 'image') {
+                    el.innerHTML = `<img src="${obj.src || ''}" alt="Изображение">`;
+                }
+
+                // Кнопка удаления
+                const delBtn = document.createElement('button');
+                delBtn.className = 'delete-object';
+                delBtn.textContent = '×';
+                delBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    deleteObject(obj.id);
+                });
+                el.appendChild(delBtn);
+
+                // Ручка изменения размера
+                const resizeHandle = document.createElement('div');
+                resizeHandle.className = 'resize-handle';
+                el.appendChild(resizeHandle);
+
+                // События
+                el.addEventListener('mousedown', function(e) {
+                    if (e.target.classList.contains('delete-object') || e.target.closest('.resize-handle')) return;
+                    selectObject(obj.id);
+                    startDrag(e, obj.id);
+                });
+
+                // Ресайз
+                resizeHandle.addEventListener('mousedown', function(e) {
+                    e.stopPropagation();
+                    startResize(e, obj.id);
+                });
+
+                canvas.appendChild(el);
+            });
+
+            // Клик по пустому месту для снятия выделения
+            canvas.addEventListener('mousedown', function(e) {
+                if (e.target === canvas) {
+                    selectedObjectId = null;
+                    renderProperties();
+                    document.querySelectorAll('.object').forEach(el => el.classList.remove('selected'));
+                }
+            });
+        }
+
+        // ===== ОБЪЕКТЫ =====
+        function addTextObject() {
+            const slide = getCurrentSlide();
+            if (!slide) return;
+
+            const obj = {
+                id: nextObjectId++,
+                type: 'text',
+                content: 'Новый текст',
+                x: 50 + Math.random() * 100,
+                y: 50 + Math.random() * 100,
+                width: 200,
+                height: 60,
+                fontSize: 24,
+                fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+                color: '#000000'
+            };
+
+            slide.objects.push(obj);
+            selectedObjectId = obj.id;
+            saveData();
+            renderEditor();
+        }
+
+        function addImageObject() {
+            const slide = getCurrentSlide();
+            if (!slide) return;
+
+            // Используем реальное изображение из встроенной библиотеки
+            const images = [
+                'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"%3E%3Crect width="400" height="300" fill="%23f0f0f0"/%3E%3Ctext x="200" y="150" text-anchor="middle" font-family="sans-serif" font-size="24" fill="%23999"%3EИзображение%3C/text%3E%3C/svg%3E',
+                'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"%3E%3Crect width="400" height="300" fill="%23e8f0fe"/%3E%3Ccircle cx="200" cy="150" r="80" fill="%23cc0000" opacity="0.3"/%3E%3Ctext x="200" y="160" text-anchor="middle" font-family="sans-serif" font-size="20" fill="%23666"%3EФото%3C/text%3E%3C/svg%3E'
+            ];
+
+            const obj = {
+                id: nextObjectId++,
+                type: 'image',
+                src: images[Math.floor(Math.random() * images.length)],
+                x: 50 + Math.random() * 100,
+                y: 50 + Math.random() * 100,
+                width: 200,
+                height: 150
+            };
+
+            slide.objects.push(obj);
+            selectedObjectId = obj.id;
+            saveData();
+            renderEditor();
+        }
+
+        function selectObject(id) {
+            selectedObjectId = id;
+            renderProperties();
+            document.querySelectorAll('.object').forEach(el => {
+                el.classList.toggle('selected', parseInt(el.dataset.id) === id);
+            });
+        }
+
+        function deleteObject(id) {
+            const slide = getCurrentSlide();
+            if (!slide) return;
+
+            slide.objects = slide.objects.filter(o => o.id !== id);
+            if (selectedObjectId === id) selectedObjectId = null;
+            saveData();
+            renderEditor();
+        }
+
+        function updateObjectContent(id, content) {
+            const slide = getCurrentSlide();
+            if (!slide) return;
+            const obj = slide.objects.find(o => o.id === id);
+            if (obj && obj.type === 'text') {
+                obj.content = content;
+                saveData();
+            }
+        }
+
+        // ===== ПЕРЕТАСКИВАНИЕ =====
+        function startDrag(e, id) {
+            const obj = getObjectById(id);
+            if (!obj) return;
+
+            const rect = e.currentTarget.getBoundingClientRect();
+            const canvasRect = document.getElementById('slideCanvas').getBoundingClientRect();
+
+            dragData = {
+                id: id,
+                offsetX: e.clientX - rect.left,
+                offsetY: e.clientY - rect.top,
+                startX: obj.x || 0,
+                startY: obj.y || 0
+            };
+
+            document.addEventListener('mousemove', onDrag);
+            document.addEventListener('mouseup', endDrag);
+            e.preventDefault();
+        }
+
+        function onDrag(e) {
+            if (!dragData) return;
+            const canvasRect = document.getElementById('slideCanvas').getBoundingClientRect();
+            const obj = getObjectById(dragData.id);
+            if (!obj) return;
+
+            let newX = e.clientX - canvasRect.left - dragData.offsetX;
+            let newY = e.clientY - canvasRect.top - dragData.offsetY;
+
+            obj.x = Math.max(0, newX);
+            obj.y = Math.max(0, newY);
+
+            const el = document.querySelector(`.object[data-id="${dragData.id}"]`);
+            if (el) {
+                el.style.left = obj.x + 'px';
+                el.style.top = obj.y + 'px';
+            }
+            saveData();
+        }
+
+        function endDrag() {
+            document.removeEventListener('mousemove', onDrag);
+            document.removeEventListener('mouseup', endDrag);
+            dragData = null;
+        }
+
+        // ===== ИЗМЕНЕНИЕ РАЗМЕРА =====
+        function startResize(e, id) {
+            const obj = getObjectById(id);
+            if (!obj) return;
+
+            const startX = e.clientX;
+            const startY = e.clientY;
+            const startWidth = obj.width || 100;
+            const startHeight = obj.height || 100;
+
+            function onResize(ev) {
+                const dx = ev.clientX - startX;
+                const dy = ev.clientY - startY;
+                const newWidth = Math.max(50, startWidth + dx);
+                const newHeight = Math.max(50, startHeight + dy);
+
+                obj.width = newWidth;
+                obj.height = newHeight;
+
+                const el = document.querySelector(`.object[data-id="${id}"]`);
+                if (el) {
+                    el.style.width = newWidth + 'px';
+                    el.style.height = newHeight + 'px';
+                }
+                saveData();
+            }
+
+            function endResize() {
+                document.removeEventListener('mousemove', onResize);
+                document.removeEventListener('mouseup', endResize);
+            }
+
+            document.addEventListener('mousemove', onResize);
+            document.addEventListener('mouseup', endResize);
+            e.preventDefault();
+        }
+
+        function getObjectById(id) {
+            const slide = getCurrentSlide();
+            if (!slide) return null;
+            return slide.objects.find(o => o.id === id);
+        }
+
+        // ===== СВОЙСТВА ОБЪЕКТА =====
+        function renderProperties() {
+            const container = document.getElementById('objectProperties');
+            if (selectedObjectId === null) {
+                container.innerHTML = `
+                    <label>Свойства объекта</label>
+                    <div style="font-size:13px; color:#888; text-align:center; padding:10px 0;">
+                        Выберите объект на слайде
+                    </div>
+                `;
+                return;
+            }
+
+            const obj = getObjectById(selectedObjectId);
+            if (!obj) {
+                container.innerHTML = `<div style="font-size:13px; color:#888; text-align:center; padding:10px 0;">Объект не найден</div>`;
+                return;
+            }
+
+            let html = `<label>Свойства объекта</label>`;
+
+            if (obj.type === 'text') {
+                html += `
+                    <label>Текст</label>
+                    <input type="text" value="${obj.content || ''}" onchange="updateTextProperty(${obj.id}, 'content', this.value)">
+                    <label>Размер шрифта</label>
+                    <input type="number" value="${obj.fontSize || 24}" min="8" max="200" onchange="updateTextProperty(${obj.id}, 'fontSize', parseInt(this.value))">
+                    <label>Шрифт</label>
+                    <input type="text" value="${obj.fontFamily || ''}" placeholder="Название шрифта" onchange="updateTextProperty(${obj.id}, 'fontFamily', this.value)">
+                    <div class="font-upload">
+                        <label>Загрузить шрифт (.ttf, .woff, .woff2)</label>
+                        <input type="file" accept=".ttf,.woff,.woff2,.otf" onchange="uploadFont(${obj.id}, this)">
+                    </div>
+                    <label>Цвет</label>
+                    <input type="color" value="${obj.color || '#000000'}" onchange="updateTextProperty(${obj.id}, 'color', this.value)">
+                `;
+            } else if (obj.type === 'image') {
+                html += `
+                    <label>Заменить фото</label>
+                    <input type="file" accept="image/*" onchange="uploadImage(${obj.id}, this)">
+                    <label>Ширина</label>
+                    <input type="number" value="${obj.width || 200}" min="20" onchange="updateImageProperty(${obj.id}, 'width', parseInt(this.value))">
+                    <label>Высота</label>
+                    <input type="number" value="${obj.height || 150}" min="20" onchange="updateImageProperty(${obj.id}, 'height', parseInt(this.value))">
+                `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        function updateTextProperty(id, prop, value) {
+            const obj = getObjectById(id);
+            if (!obj) return;
+            obj[prop] = value;
+            saveData();
+            renderSlide();
+            renderProperties();
+        }
+
+        function updateImageProperty(id, prop, value) {
+            const obj = getObjectById(id);
+            if (!obj) return;
+            obj[prop] = value;
+            saveData();
+            renderSlide();
+            renderProperties();
+        }
+
+        function uploadFont(id, input) {
+            const file = input.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const fontData = e.target.result;
+                const fontName = file.name.split('.')[0];
+
+                // Создаём CSS @font-face
+                const style = document.createElement('style');
+                const fontFamily = 'custom_' + fontName + '_' + Date.now();
+                const fontFormat = file.name.endsWith('.ttf') ? 'truetype' :
+                                  file.name.endsWith('.woff') ? 'woff' :
+                                  file.name.endsWith('.woff2') ? 'woff2' : 'truetype';
+                style.textContent = `
+                    @font-face {
+                        font-family: '${fontFamily}';
+                        src: url('${fontData}') format('${fontFormat}');
+                        font-weight: normal;
+                        font-style: normal;
+                    }
+                `;
+                document.head.appendChild(style);
+
+                // Применяем к объекту
+                const obj = getObjectById(id);
+                if (obj) {
+                    obj.fontFamily = fontFamily;
+                    saveData();
+                    renderSlide();
+                    renderProperties();
+                }
+
+                document.getElementById('backupSuccess').textContent = 'Шрифт загружен!';
+                document.getElementById('backupSuccess').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('backupSuccess').style.display = 'none';
+                }, 3000);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function uploadImage(id, input) {
+            const file = input.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const obj = getObjectById(id);
+                if (obj) {
+                    obj.src = e.target.result;
+                    saveData();
+                    renderSlide();
+                    renderProperties();
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // ===== ЭКСПОРТ PDF =====
+        function exportPDF() {
+            const p = getCurrentPresentation();
+            if (!p || !p.slides || p.slides.length === 0) {
+                alert('Нет слайдов для экспорта');
+                return;
+            }
+
+            // Простой экспорт через печать
+            const printWindow = window.open('', '_blank', 'width=800,height=600');
+            if (!printWindow) {
+                alert('Разрешите всплывающие окна для экспорта');
+                return;
+            }
+
+            let html = `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <title>${p.name}</title>
+                    <style>
+                        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 20px; background: #fff; }
+                        .slide { page-break-after: always; margin-bottom: 30px; padding: 40px; border: 1px solid #eee; min-height: 500px; position: relative; }
+                        .slide:last-child { page-break-after: avoid; }
+                        .slide-title { font-size: 14px; color: #999; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
+                        .object-text { position: absolute; }
+                        .object-image img { max-width: 100%; max-height: 400px; }
+                    </style>
+                </head>
+                <body>
+                    <h1 style="text-align:center; color:#cc0000; letter-spacing:3px; text-transform:uppercase; margin-bottom:30px;">${p.name}</h1>
+            `;
+
+            p.slides.forEach((slide, idx) => {
+                html += `<div class="slide"><div class="slide-title">Слайд ${idx + 1}</div>`;
+                slide.objects.forEach(obj => {
+                    if (obj.type === 'text') {
+                        html += `<div class="object-text" style="left:${obj.x||0}px; top:${obj.y||0}px; font-size:${obj.fontSize||24}px; font-family:${obj.fontFamily||'sans-serif'}; color:${obj.color||'#000'};">${obj.content||'Текст'}</div>`;
+                    } else if (obj.type === 'image') {
+                        html += `<div class="object-image" style="left:${obj.x||0}px; top:${obj.y||0}px;"><img src="${obj.src||''}" style="width:${obj.width||200}px; height:${obj.height||150}px; object-fit:contain;"></div>`;
+                    }
+                });
+                html += `</div>`;
+            });
+
+            html += `
+                    <div style="text-align:center; margin-top:40px; font-size:12px; color:#888; letter-spacing:2px; text-transform:uppercase;">Shnuk Papermaker</div>
+                </body>
+                </html>
+            `;
+
+            printWindow.document.write(html);
+            printWindow.document.close();
+
+            // Ждём загрузки стилей и печатаем
+            setTimeout(() => {
+                printWindow.print();
+            }, 500);
+        }
+
+        // ===== ЭКСПОРТ PNG =====
+        function exportPNG() {
+            const p = getCurrentPresentation();
+            if (!p || !p.slides || p.slides.length === 0) {
+                alert('Нет слайдов для экспорта');
+                return;
+            }
+
+            // Используем html2canvas для каждого слайда
+            if (typeof html2canvas === 'undefined') {
+                alert('Библиотека html2canvas не загружена. Проверьте подключение.');
+                return;
+            }
+
+            // Создаём временный контейнер
+            const container = document.createElement('div');
+            container.style.cssText = 'position:fixed; left:-9999px; top:0; width:800px; background:#fff; padding:20px;';
+            document.body.appendChild(container);
+
+            let captured = 0;
+            const total = p.slides.length;
+
+            function captureSlide(index) {
+                if (index >= total) {
+                    document.body.removeChild(container);
+                    return;
+                }
+
+                const slide = p.slides[index];
+                container.innerHTML = `
+                    <div style="padding:40px; min-height:500px; border:1px solid #eee; background:#fff;">
+                        <div style="font-size:14px; color:#999; letter-spacing:2px; text-transform:uppercase; margin-bottom:20px;">Слайд ${index + 1}</div>
+                        ${slide.objects.map(obj => {
+                            if (obj.type === 'text') {
+                                return `<div style="position:absolute; left:${obj.x||0}px; top:${obj.y||0}px; font-size:${obj.fontSize||24}px; font-family:${obj.fontFamily||'sans-serif'}; color:${obj.color||'#000'};">${obj.content||'Текст'}</div>`;
+                            } else if (obj.type === 'image') {
+                                return `<div style="position:absolute; left:${obj.x||0}px; top:${obj.y||0}px;"><img src="${obj.src||''}" style="width:${obj.width||200}px; height:${obj.height||150}px; object-fit:contain;"></div>`;
+                            }
+                            return '';
+                        }).join('')}
+                        <div style="position:absolute; bottom:20px; right:20px; font-size:12px; color:#888; letter-spacing:2px; text-transform:uppercase;">Shnuk Papermaker</div>
+                    </div>
+                `;
+
+                // Применяем позиционирование для объектов
+                const objects = container.querySelectorAll('[style*="position:absolute"]');
+                objects.forEach(el => {
+                    el.style.position = 'absolute';
+                });
+
+                html2canvas(container, {
+                    scale: 2,
+                    useCORS: true,
+                    backgroundColor: '#ffffff',
+                    width: 800,
+                    height: 600
+                }).then(canvas => {
+                    const link = document.createElement('a');
+                    link.download = `${p.name}_слайд_${index + 1}.png`;
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                    captured++;
+                    captureSlide(index + 1);
+                }).catch(() => {
+                    captured++;
+                    captureSlide(index + 1);
+                });
+            }
+
+            captureSlide(0);
+        }
+
+        // ===== ПЕЧАТЬ =====
+        function printSlides() {
+            const p = getCurrentPresentation();
+            if (!p || !p.slides || p.slides.length === 0) {
+                alert('Нет слайдов для печати');
+                return;
+            }
+
+            // Используем ту же логику, что и для PDF
+            exportPDF();
+        }
+
+        // ===== БЕКАП =====
+        function createBackup() {
+            try {
+                const data = localStorage.getItem('shnuk_papermaker_data');
+                const json = JSON.stringify(JSON.parse(data) || { presentations: [], nextObjectId: 1 }, null, 2);
+                const blob = new Blob([json], {type: 'application/json'});
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'shnuk_papermaker_backup_' + new Date().toISOString().slice(0,10) + '.shnuk';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                document.getElementById('backupSuccess').textContent = 'Бекап создан и скачан!';
+                document.getElementById('backupSuccess').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('backupSuccess').style.display = 'none';
+                }, 3000);
+            } catch(e) {
+                document.getElementById('backupError').textContent = 'Ошибка: ' + e.message;
+                document.getElementById('backupError').style.display = 'block';
+            }
+        }
+
+        function restoreBackup(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    if (data.presentations) {
+                        localStorage.setItem('shnuk_papermaker_data', JSON.stringify(data));
+                        loadData();
+                        renderPresentations();
+                        document.getElementById('backupSuccess').textContent = 'Бекап восстановлен!';
+                        document.getElementById('backupSuccess').style.display = 'block';
+                        setTimeout(() => {
+                            document.getElementById('backupSuccess').style.display = 'none';
+                        }, 3000);
+                    } else {
+                        document.getElementById('backupError').textContent = 'Неверный формат бекапа';
+                        document.getElementById('backupError').style.display = 'block';
+                    }
+                } catch(err) {
+                    document.getElementById('backupError').textContent = 'Ошибка восстановления: ' + err.message;
+                    document.getElementById('backupError').style.display = 'block';
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function clearAllData() {
+            if (!confirm('Очистить все данные (презентации, настройки)?')) return;
+            localStorage.removeItem('shnuk_papermaker_data');
+            presentations = [];
+            nextObjectId = 1;
+            renderPresentations();
+            if (currentPresentationId !== null) {
+                document.getElementById('mainScreen').style.display = 'block';
+                document.getElementById('editorScreen').style.display = 'none';
+                currentPresentationId = null;
+            }
+            document.getElementById('backupSuccess').textContent = 'Все данные очищены';
+            document.getElementById('backupSuccess').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('backupSuccess').style.display = 'none';
+            }, 3000);
+        }
+
+        function refreshDataViewer() {
+            const viewer = document.getElementById('dataViewer');
+            viewer.style.display = viewer.style.display === 'none' ? 'block' : 'none';
+            if (viewer.style.display === 'block') {
+                const data = localStorage.getItem('shnuk_papermaker_data');
+                viewer.textContent = data ? JSON.stringify(JSON.parse(data), null, 2) : 'Нет данных';
+            }
+        }
+
+        function openBackupModal() {
+            document.getElementById('backupModal').classList.add('active');
+            document.getElementById('backupError').style.display = 'none';
+            document.getElementById('backupSuccess').style.display = 'none';
+            document.getElementById('dataViewer').style.display = 'none';
+        }
+
+        function closeBackupModal() {
+            document.getElementById('backupModal').classList.remove('active');
+        }
+
+        document.getElementById('backupModal').addEventListener('click', function(e) {
+            if (e.target === this) closeBackupModal();
+        });
+
+        // ===== ЗАПУСК =====
+        document.addEventListener('DOMContentLoaded', function() {
+            loadData();
+        });
+
+        console.log('[Shnuk Papermaker] Загружен');
+        console.log('[Shnuk Papermaker] Для экспорта PNG используется html2canvas');
+    </script>
+
+    <!-- Подключаем html2canvas для PNG -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</body>
+</html>

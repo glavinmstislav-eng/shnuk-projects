@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="yandex" content="noindex, nofollow">
     <title>Shnuk Projects</title>
     
     <style>
@@ -13,7 +15,6 @@
             font-weight: 400;
             font-display: swap;
         }
-
         @font-face {
             font-family: 'ST-SimpleSquare';
             src: url('ST-SimpleSquare.ttf') format('truetype');
@@ -21,7 +22,12 @@
             font-display: swap;
         }
 
-        /* ===== ШРИФТЫ ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         html, body, * {
             font-family: 'ST-SimpleSquare', sans-serif !important;
         }
@@ -29,12 +35,6 @@
         body.use-system-font,
         body.use-system-font * {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
         }
 
         html {
@@ -55,11 +55,15 @@
             width: 100%;
             height: 100%;
             z-index: 0;
-            background-image: url('wallpaper.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             opacity: 0.35;
+            will-change: transform;
+        }
+
+        .wallpaper-bg.loaded {
+            background-image: url('wallpaper.png');
         }
 
         .main-content {
@@ -71,92 +75,25 @@
             margin: 0 auto;
         }
 
-        /* ===== ШАПКА С АВАТАРОМ ===== */
-        .top-bar {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            padding: 10px 20px;
-            position: relative;
-            z-index: 100;
-            margin-bottom: 10px;
+        .twinlay-hidden {
+            display: none !important;
         }
 
-        .avatar-btn {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            border: 2px solid #cc0000;
-            background: #ffffff;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            color: #cc0000;
-            transition: all 0.3s ease;
-            overflow: hidden;
-            position: relative;
-            flex-shrink: 0;
-        }
-
-        .avatar-btn:hover {
-            transform: scale(1.05);
-            border-color: #990000;
-        }
-
-        .avatar-btn img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-
-        .avatar-btn svg {
-            width: 24px;
-            height: 24px;
-            fill: #cc0000;
-        }
-
-        .header {
-            text-align: center;
-            padding: 20px 0 30px;
-        }
-
-        .header h1 {
-            font-weight: 700;
-            font-size: 52px;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            color: #ffffff;
-            display: inline-block;
-            padding: 10px 40px;
-            background: #cc0000;
-            line-height: 1.2;
-            box-shadow: none;
-            text-shadow: none;
-        }
-
-        .header .subtitle {
-            font-weight: 400;
-            font-size: 18px;
-            letter-spacing: 3px;
-            color: #000000;
-            margin-top: 10px;
+        [data-twinlay-keep] {
+            display: block !important;
         }
 
         .section {
             max-width: 900px;
             margin: 25px auto;
             padding: 30px 40px;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.96);
             position: relative;
             z-index: 1;
-            border-radius: 0;
-            transition: background 0.3s ease, box-shadow 0.3s ease;
+            transition: background 0.3s ease;
+            content-visibility: auto;
+            contain-intrinsic-size: 1px 400px;
+            border: none;
         }
 
         .section-title {
@@ -189,7 +126,7 @@
             margin-bottom: 18px;
             padding: 12px 16px;
             background: rgba(0, 0, 0, 0.03);
-            border: 1px solid #e0e0e0;
+            border: none;
             position: relative;
             z-index: 1;
         }
@@ -347,7 +284,6 @@
             position: relative;
             display: inline-block;
             min-width: 200px;
-            border: 2px solid #000000;
             background: #ffffff;
             font-weight: 400;
             font-size: 14px;
@@ -355,10 +291,9 @@
             text-transform: uppercase;
             color: #000000;
             transition: all 0.3s ease;
-            border-radius: 0;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
             user-select: none;
             z-index: 5;
+            border: none;
         }
 
         .custom-select-window .selected-option {
@@ -390,15 +325,13 @@
             display: none;
             position: absolute;
             top: calc(100% + 2px);
-            left: -2px;
-            right: -2px;
+            left: 0;
+            right: 0;
             background: #ffffff;
-            border: 2px solid #000000;
-            border-top: none;
+            border: none;
             z-index: 1000;
             max-height: 220px;
             overflow-y: auto;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
         .custom-select-window.open .options-list {
@@ -433,10 +366,8 @@
             font-weight: 700;
         }
 
-        .control-group .btn,
         .control-group .btn-window {
             padding: 8px 30px;
-            border: 2px solid #000000;
             background: #ffffff;
             font-weight: 400;
             font-size: 14px;
@@ -444,26 +375,36 @@
             text-transform: uppercase;
             color: #000000;
             transition: all 0.3s ease;
-            border-radius: 0;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
             cursor: pointer;
+            border: none;
         }
 
         .control-group .btn-window:hover {
             background: #cc0000;
             color: #ffffff;
-            border-color: #cc0000;
         }
 
         .control-group .btn-window.primary {
             background: #cc0000;
             color: #ffffff;
-            border-color: #cc0000;
         }
 
         .control-group .btn-window.primary:hover {
             background: #990000;
-            border-color: #990000;
+        }
+
+        .control-group .btn-window.papermaker-btn {
+            background: #ffffff;
+            color: #000000;
+            border: 2px solid #cc0000;
+            padding: 12px 40px;
+            font-size: 15px;
+            letter-spacing: 3px;
+        }
+
+        .control-group .btn-window.papermaker-btn:hover {
+            background: #cc0000;
+            color: #ffffff;
         }
 
         .control-group .checkbox-group {
@@ -476,7 +417,7 @@
             width: 18px;
             height: 18px;
             accent-color: #cc0000 !important;
-            border: 2px solid #000000;
+            border: none;
             appearance: none;
             -webkit-appearance: none;
             position: relative;
@@ -487,7 +428,6 @@
         .control-group .checkbox-group input[type="checkbox"]:checked {
             accent-color: #cc0000 !important;
             background-color: #cc0000 !important;
-            border-color: #cc0000 !important;
         }
 
         .control-group .checkbox-group input[type="checkbox"]:checked::after {
@@ -500,13 +440,12 @@
         }
 
         .control-group .checkbox-group input[type="checkbox"]:hover {
-            border-color: #cc0000;
+            outline: 2px solid #cc0000;
         }
 
         .control-group .checkbox-group input[type="checkbox"]:focus {
             outline: 2px solid #cc0000 !important;
             outline-offset: 2px;
-            border-color: #cc0000 !important;
         }
 
         .control-group .checkbox-group span {
@@ -574,8 +513,12 @@
             padding: 14px 18px;
             margin-bottom: 10px;
             background: rgba(255, 255, 255, 0.5);
-            border: 1px solid #e0e0e0;
             position: relative;
+            border: none;
+        }
+
+        .result-item.favorite {
+            background: rgba(204, 0, 0, 0.06);
         }
 
         .result-item .question {
@@ -606,25 +549,95 @@
             text-transform: uppercase;
         }
 
-        .result-item .show-answer-btn {
+        .result-item .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .result-item .actions button {
             padding: 4px 16px;
-            background: transparent;
-            border: 1px solid #000000;
+            background: #ffffff;
             font-weight: 400;
             font-size: 12px;
             letter-spacing: 1px;
             text-transform: uppercase;
             color: #000000;
             transition: all 0.3s ease;
-            margin-top: 8px;
-            border-radius: 0;
+            border: none;
             cursor: pointer;
         }
 
-        .result-item .show-answer-btn:hover {
+        .result-item .actions button:hover {
             background: #cc0000;
             color: #ffffff;
-            border-color: #cc0000;
+        }
+
+        .result-item .actions button.fav-btn.active {
+            background: #cc0000;
+            color: #ffffff;
+        }
+
+        .result-item .actions button.png-btn:hover {
+            background: #000000;
+            color: #ffffff;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px 0 30px;
+            content-visibility: auto;
+            contain-intrinsic-size: 1px 150px;
+        }
+
+        .header h1 {
+            font-weight: 700;
+            font-size: 52px;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: #ffffff;
+            display: inline-block;
+            padding: 10px 40px;
+            background: #cc0000;
+            line-height: 1.2;
+        }
+
+        .header .subtitle {
+            font-weight: 400;
+            font-size: 18px;
+            letter-spacing: 3px;
+            color: #000000;
+            margin-top: 10px;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 10px 20px;
+            position: relative;
+            z-index: 100;
+            margin-bottom: 10px;
+            content-visibility: auto;
+            contain-intrinsic-size: 1px 60px;
+        }
+
+        .backup-btn {
+            padding: 8px 20px;
+            background: #ffffff;
+            font-weight: 400;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #000000;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .backup-btn:hover {
+            color: #cc0000;
         }
 
         .footer {
@@ -635,6 +648,8 @@
             z-index: 2;
             margin-top: 10px;
             background: transparent;
+            content-visibility: auto;
+            contain-intrinsic-size: 1px 80px;
         }
 
         .footer .footer-text {
@@ -649,20 +664,15 @@
             color: #000000;
         }
 
-        *:focus-visible {
-            outline: 2px solid #cc0000 !important;
-            outline-offset: 2px;
+        .favorites-section {
+            margin-bottom: 20px;
         }
 
-        a {
-            color: #cc0000 !important;
+        .favorites-section .section-title {
+            font-size: 22px;
+            letter-spacing: 3px;
         }
 
-        a:hover {
-            color: #990000 !important;
-        }
-
-        /* ===== МОДАЛЬНОЕ ОКНО ===== */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -689,8 +699,7 @@
             overflow-y: auto;
             padding: 30px 35px;
             position: relative;
-            border: 2px solid #000000;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border: none;
         }
 
         .modal-close {
@@ -738,45 +747,14 @@
             margin-bottom: 5px;
         }
 
-        .modal .form-group input[type="text"],
-        .modal .form-group input[type="password"],
         .modal .form-group input[type="file"] {
             width: 100%;
             padding: 10px 14px;
-            border: 2px solid #000000;
+            border: none;
             font-size: 14px;
             background: #ffffff;
             color: #000;
-            border-radius: 0;
             font-family: 'ST-SimpleSquare', sans-serif !important;
-        }
-
-        .modal .form-group input[type="file"] {
-            padding: 8px;
-        }
-
-        .modal .form-group .avatar-preview {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            border: 3px solid #cc0000;
-            overflow: hidden;
-            margin: 10px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f0f0f0;
-        }
-
-        .modal .form-group .avatar-preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .modal .form-group .avatar-preview .placeholder {
-            font-size: 32px;
-            color: #cc0000;
         }
 
         .modal .btn-primary {
@@ -784,7 +762,7 @@
             padding: 12px;
             background: #cc0000;
             color: #ffffff;
-            border: 2px solid #cc0000;
+            border: none;
             font-size: 16px;
             letter-spacing: 3px;
             text-transform: uppercase;
@@ -796,7 +774,6 @@
 
         .modal .btn-primary:hover {
             background: #990000;
-            border-color: #990000;
         }
 
         .modal .btn-secondary {
@@ -804,7 +781,7 @@
             padding: 10px;
             background: transparent;
             color: #000;
-            border: 2px solid #000000;
+            border: none;
             font-size: 14px;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -824,7 +801,7 @@
             padding: 10px;
             background: transparent;
             color: #cc0000;
-            border: 2px solid #cc0000;
+            border: none;
             font-size: 14px;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -845,7 +822,7 @@
             font-size: 12px;
             max-height: 200px;
             overflow: auto;
-            border: 1px solid #ddd;
+            border: none;
             white-space: pre-wrap;
             word-break: break-all;
             font-family: monospace;
@@ -875,43 +852,17 @@
             display: none;
         }
 
-        .modal .tab-buttons {
-            display: flex;
-            gap: 5px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
+        *:focus-visible {
+            outline: 2px solid #cc0000 !important;
+            outline-offset: 2px;
         }
 
-        .modal .tab-btn {
-            flex: 1;
-            padding: 8px 12px;
-            border: 2px solid #000;
-            background: transparent;
-            cursor: pointer;
-            font-family: 'ST-SimpleSquare', sans-serif !important;
-            font-size: 12px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            min-width: 60px;
+        a {
+            color: #cc0000 !important;
         }
 
-        .modal .tab-btn.active {
-            background: #cc0000;
-            color: #fff;
-            border-color: #cc0000;
-        }
-
-        .modal .tab-btn:hover:not(.active) {
-            background: #f0f0f0;
-        }
-
-        .modal .tab-content {
-            display: none;
-        }
-
-        .modal .tab-content.active {
-            display: block;
+        a:hover {
+            color: #990000 !important;
         }
 
         @media (max-width: 768px) {
@@ -929,7 +880,7 @@
             .toggle-switch .toggle-label { font-size: 12px; }
             .modal { padding: 20px; }
             .top-bar { padding: 5px 10px; }
-            .avatar-btn { width: 40px; height: 40px; }
+            .backup-btn { font-size: 12px; padding: 6px 14px; }
         }
 
         @media (max-width: 480px) {
@@ -937,7 +888,7 @@
             .header .subtitle { font-size: 12px; letter-spacing: 1px; }
             .section { padding: 16px 12px; margin: 12px 6px; }
             .section-title { font-size: 17px; letter-spacing: 1px; }
-            .control-group .btn, .control-group .btn-window { font-size: 12px; padding: 6px 14px; }
+            .control-group .btn-window { font-size: 12px; padding: 6px 14px; }
             .result-item { padding: 10px 12px; }
             .result-item .question { font-size: 14px; }
             .footer .footer-text { font-size: 12px; letter-spacing: 2px; }
@@ -946,36 +897,52 @@
             .toggle-switch input[type="checkbox"]::after { width: 14px; height: 14px; }
             .toggle-switch input[type="checkbox"]:checked::after { transform: translateX(18px); }
             .modal { padding: 15px; }
-            .avatar-btn { width: 36px; height: 36px; }
-            .modal .tab-btn { font-size: 10px; padding: 6px 8px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="wallpaper-bg"></div>
+    <div class="wallpaper-bg" id="wallpaperBg"></div>
 
     <div class="main-content">
 
-        <!-- ===== ВЕРХНЯЯ ПАНЕЛЬ С АВАТАРОМ ===== -->
-        <div class="top-bar">
-            <button class="avatar-btn" id="avatarBtn" onclick="openAccountModal()">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M12 14c-4 0-7 2-7 4v2h14v-2c0-2-3-4-7-4z"/></svg>
-            </button>
+        <div class="top-bar" data-twinlay-keep>
+            <button class="backup-btn" onclick="openBackupModal()">Бекап</button>
         </div>
 
-        <div class="header">
+        <div class="header" data-twinlay-keep>
             <h1>SHNUK PROJECTS</h1>
             <div class="subtitle">Обучающие материалы Shnuk Projects</div>
         </div>
 
-        <!-- ===== РАЗДЕЛ 1: SHNUK MATH ===== -->
-        <div class="section">
+        <div class="section favorites-section" id="favoritesSection" style="display:none;" data-twinlay-keep>
+            <div class="section-title"><span>★</span> ИЗБРАННОЕ</div>
+            <div class="section-content">
+                <div class="results" id="favoritesResults"></div>
+            </div>
+        </div>
+
+        <!-- ===== SHNUK PAPERMAKER ===== -->
+        <div class="section" data-twinlay-keep>
+            <div class="section-title"><span>SHNUK</span> PAPERMAKER</div>
+            <div class="section-content">
+                <div style="text-align:center; padding:10px 0;">
+                    <p style="font-size:16px; color:#333; margin-bottom:20px; letter-spacing:1px;">
+                        Создавайте и редактируйте свои задания в Papermaker
+                    </p>
+                    <button class="btn-window papermaker-btn" onclick="openPapermaker()" style="padding:12px 40px; background:#ffffff; color:#000000; border:2px solid #cc0000; font-size:15px; letter-spacing:3px;">
+                        Открыть Papermaker
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="sectionMath">
             <div class="section-title"><span>SHNUK</span> MATH</div>
             <div class="section-content">
                 <div style="display:flex; gap:15px; flex-wrap:wrap; margin-bottom:15px;">
-                    <button class="btn-window primary" onclick="showMathSub('mathStandard')" style="padding:10px 30px; background:#cc0000; color:#fff; border:2px solid #cc0000;">Shnuk Math</button>
-                    <button class="btn-window" onclick="showMathSub('mathLogic')" style="padding:10px 30px; background:transparent; color:#000; border:2px solid #000;">Shnuk Math Logic</button>
+                    <button class="btn-window primary" onclick="showMathSub('mathStandard')" style="padding:10px 30px; background:#cc0000; color:#fff;">Shnuk Math</button>
+                    <button class="btn-window" onclick="showMathSub('mathLogic')" style="padding:10px 30px; background:transparent; color:#000;">Shnuk Math Logic</button>
                 </div>
 
                 <div id="mathStandard">
@@ -1030,7 +997,7 @@
                         </div>
                     </div>
 
-                    <button class="btn-window primary" onclick="generateMath()" style="padding:12px 40px; background:#cc0000; color:#fff; border:2px solid #cc0000; font-size:15px; letter-spacing:3px;">Сгенерировать</button>
+                    <button class="btn-window primary" onclick="generateMath()" style="padding:12px 40px; background:#cc0000; color:#fff; font-size:15px; letter-spacing:3px;">Сгенерировать</button>
 
                     <div class="results" id="mathResults"></div>
                 </div>
@@ -1044,15 +1011,14 @@
                         </div>
                     </div>
 
-                    <button class="btn-window primary" onclick="generateLogic()" style="padding:12px 40px; background:#cc0000; color:#fff; border:2px solid #cc0000; font-size:15px; letter-spacing:3px;">Сгенерировать</button>
+                    <button class="btn-window primary" onclick="generateLogic()" style="padding:12px 40px; background:#cc0000; color:#fff; font-size:15px; letter-spacing:3px;">Сгенерировать</button>
 
                     <div class="results" id="logicResults"></div>
                 </div>
             </div>
         </div>
 
-        <!-- ===== РАЗДЕЛ 2: SHNUK HISTORY ===== -->
-        <div class="section">
+        <div class="section" id="sectionHistory">
             <div class="section-title"><span>SHNUK</span> HISTORY</div>
             <div class="section-content">
                 <div class="control-group">
@@ -1079,14 +1045,13 @@
                     </div>
                 </div>
 
-                <button class="btn-window primary" onclick="generateHistory()" style="padding:12px 40px; background:#cc0000; color:#fff; border:2px solid #cc0000; font-size:15px; letter-spacing:3px;">Сгенерировать</button>
+                <button class="btn-window primary" onclick="generateHistory()" style="padding:12px 40px; background:#cc0000; color:#fff; font-size:15px; letter-spacing:3px;">Сгенерировать</button>
 
                 <div class="results" id="historyResults"></div>
             </div>
         </div>
 
-        <!-- ===== РАЗДЕЛ 3: SHNUK TEXT ===== -->
-        <div class="section">
+        <div class="section" id="sectionText">
             <div class="section-title"><span>SHNUK</span> TEXT</div>
             <div class="section-content">
                 <div class="control-group" style="position:relative; z-index:10;">
@@ -1104,13 +1069,12 @@
                 <div style="font-size:13px; color:#666; letter-spacing:0.5px; padding:0 16px 8px; margin-bottom:10px;">
                     При генерации выводится 20 уникальных заданий выбранного уровня.
                 </div>
-                <button class="btn-window primary" onclick="generateTextTasks()" style="padding:12px 40px; background:#cc0000; color:#fff; border:2px solid #cc0000; font-size:15px; letter-spacing:3px;">Сгенерировать 20 заданий</button>
+                <button class="btn-window primary" onclick="generateTextTasks()" style="padding:12px 40px; background:#cc0000; color:#fff; font-size:15px; letter-spacing:3px;">Сгенерировать 20 заданий</button>
                 <div class="results" id="textResults"></div>
             </div>
         </div>
 
-        <!-- ===== РАЗДЕЛ 4: НАСТРОЙКИ ===== -->
-        <div class="section">
+        <div class="section" id="sectionSettings" data-twinlay-keep>
             <div class="section-title"><span>НАСТРОЙКИ</span></div>
             <div class="section-content">
                 <div class="control-group">
@@ -1128,268 +1092,236 @@
 
     </div>
 
-    <footer class="footer">
+    <footer class="footer" data-twinlay-keep>
         <div class="footer-text">By <span>GLavin</span></div>
     </footer>
 
-    <!-- ===== МОДАЛЬНОЕ ОКНО АККАУНТА ===== -->
-    <div class="modal-overlay" id="accountModal">
+    <div class="modal-overlay" id="backupModal">
         <div class="modal">
-            <button class="modal-close" onclick="closeAccountModal()">×</button>
-            <h2><span>SHNUK</span> ID</h2>
-            
-            <div class="tab-buttons">
-                <button class="tab-btn active" data-tab="profile" onclick="switchTab('profile')">Профиль</button>
-                <button class="tab-btn" data-tab="backup" onclick="switchTab('backup')">Бекап</button>
-                <button class="tab-btn" data-tab="data" onclick="switchTab('data')">Данные</button>
+            <button class="modal-close" onclick="closeBackupModal()">×</button>
+            <h2><span>SHNUK</span> БЕКАП</h2>
+            <div class="backup-info">
+                Бекап сохраняет все данные: настройки, примеры, избранное.
+                <br>Формат файла: <strong>.shnuk</strong>
             </div>
-
-            <!-- Вкладка Профиль -->
-            <div class="tab-content active" id="tab-profile">
-                <div class="form-group">
-                    <label>Логин</label>
-                    <input type="text" id="accountLogin" placeholder="Введите логин">
-                </div>
-                <div class="form-group">
-                    <label>Пароль</label>
-                    <input type="password" id="accountPassword" placeholder="Введите пароль">
-                </div>
-                <div class="form-group">
-                    <label>Аватар</label>
-                    <div class="avatar-preview" id="avatarPreview">
-                        <div class="placeholder">👤</div>
-                    </div>
-                    <input type="file" id="avatarInput" accept="image/*" onchange="loadAvatar(event)">
-                </div>
-                <div class="error-text" id="accountError"></div>
-                <div class="success-text" id="accountSuccess"></div>
-                <button class="btn-primary" onclick="saveAccount()">Сохранить аккаунт</button>
-                <button class="btn-danger" onclick="deleteAccount()">Удалить аккаунт</button>
+            <button class="btn-primary" onclick="createBackup()">Скачать бекап (.shnuk)</button>
+            <div style="margin-top:15px; border-top:1px solid #ddd; padding-top:15px;">
+                <label style="font-size:13px; letter-spacing:1px; text-transform:uppercase; display:block; margin-bottom:10px;">Восстановить из бекапа</label>
+                <input type="file" id="backupInput" accept=".shnuk" style="width:100%; padding:8px; background:#fff; border:none;" onchange="restoreBackup(event)">
             </div>
-
-            <!-- Вкладка Бекап -->
-            <div class="tab-content" id="tab-backup">
-                <div class="backup-info">
-                    Бекап сохраняет все данные: аккаунт, настройки, примеры, ответы.
-                    <br>Формат файла: <strong>.shnuk</strong>
-                </div>
-                <button class="btn-primary" onclick="createBackup()">Скачать бекап (.shnuk)</button>
-                <div style="margin-top:15px; border-top:1px solid #ddd; padding-top:15px;">
-                    <label style="font-size:13px; letter-spacing:1px; text-transform:uppercase; display:block; margin-bottom:10px;">Восстановить из бекапа</label>
-                    <input type="file" id="backupInput" accept=".shnuk" style="width:100%; padding:8px; border:2px solid #000; background:#fff;" onchange="restoreBackup(event)">
-                </div>
-                <div class="error-text" id="backupError"></div>
-                <div class="success-text" id="backupSuccess"></div>
-            </div>
-
-            <!-- Вкладка Данные -->
-            <div class="tab-content" id="tab-data">
-                <div style="font-size:13px; color:#666; margin-bottom:10px;">
-                    Все данные, сохранённые в памяти браузера (localStorage):
-                </div>
-                <div class="data-viewer" id="dataViewer"></div>
-                <button class="btn-secondary" onclick="refreshDataViewer()" style="margin-top:10px;">Обновить</button>
-                <button class="btn-danger" onclick="clearAllData()" style="margin-top:8px;">Очистить все данные</button>
-                <div class="error-text" id="dataError"></div>
-                <div class="success-text" id="dataSuccess"></div>
-            </div>
+            <div class="error-text" id="backupError"></div>
+            <div class="success-text" id="backupSuccess"></div>
+            <button class="btn-secondary" onclick="refreshDataViewer()" style="margin-top:10px;">Посмотреть данные</button>
+            <div class="data-viewer" id="dataViewer" style="display:none;"></div>
+            <button class="btn-danger" onclick="clearAllData()" style="margin-top:8px;">Очистить все данные</button>
         </div>
     </div>
 
     <script>
-        // ===== УПРАВЛЕНИЕ АККАУНТОМ =====
-        var accountData = null;
+        /*
+         * SHNUK TWINLAY CORE
+         * Система оптимизации для идеальной работы на любом устройстве.
+         * 
+         * 1. Culling: удаляет все объекты за пределами видимой области (viewport),
+         *    оставляя только видимый объект + один сверху + один снизу.
+         * 2. Запекание размытия: заменяет динамический backdrop-filter на статичный фон,
+         *    чтобы не пересчитывать размытие в реальном времени.
+         * 3. Исключения: элементы с атрибутом data-twinlay-keep никогда не скрываются.
+         * 4. Ленивая загрузка фонового изображения.
+         * 5. content-visibility: auto для ускорения рендеринга.
+         */
 
-        function loadAccount() {
-            try {
-                var data = localStorage.getItem('shnuk_account');
-                if (data) {
-                    accountData = JSON.parse(data);
-                    updateAvatarUI();
-                } else {
-                    if (!localStorage.getItem('shnuk_first_visit_done')) {
-                        setTimeout(function() {
-                            openAccountModal();
-                            localStorage.setItem('shnuk_first_visit_done', 'true');
-                        }, 500);
+        (function twinlayCore() {
+            var bg = document.getElementById('wallpaperBg');
+            if (bg) {
+                var img = new Image();
+                img.onload = function() { bg.classList.add('loaded'); };
+                img.src = 'wallpaper.png';
+                if (img.complete) bg.classList.add('loaded');
+            }
+
+            var sections = document.querySelectorAll('.section:not([data-twinlay-keep])');
+            var buffer = 1;
+
+            function updateVisibility() {
+                var viewportHeight = window.innerHeight;
+                var scrollTop = window.scrollY;
+                var visibleIndices = [];
+
+                sections.forEach(function(el, index) {
+                    var rect = el.getBoundingClientRect();
+                    var top = rect.top + scrollTop;
+                    var bottom = rect.bottom + scrollTop;
+
+                    if (top < scrollTop + viewportHeight + 200 && bottom > scrollTop - 200) {
+                        visibleIndices.push(index);
                     }
+                });
+
+                if (visibleIndices.length === 0) {
+                    sections.forEach(function(el, idx) {
+                        el.classList.toggle('twinlay-hidden', idx !== 0);
+                    });
+                    return;
                 }
-            } catch(e) {
-                console.error('Ошибка загрузки аккаунта:', e);
+
+                var minVisible = Math.min.apply(null, visibleIndices);
+                var maxVisible = Math.max.apply(null, visibleIndices);
+                var start = Math.max(0, minVisible - buffer);
+                var end = Math.min(sections.length - 1, maxVisible + buffer);
+
+                sections.forEach(function(el, idx) {
+                    el.classList.toggle('twinlay-hidden', idx < start || idx > end);
+                });
             }
+
+            if (sections.length > 0) {
+                requestAnimationFrame(updateVisibility);
+                var scrollTimeout;
+                window.addEventListener('scroll', function() {
+                    if (scrollTimeout) window.cancelAnimationFrame(scrollTimeout);
+                    scrollTimeout = window.requestAnimationFrame(updateVisibility);
+                }, { passive: true });
+                window.addEventListener('resize', function() {
+                    if (scrollTimeout) window.cancelAnimationFrame(scrollTimeout);
+                    scrollTimeout = window.requestAnimationFrame(updateVisibility);
+                }, { passive: true });
+            }
+        })();
+
+        function openPapermaker() {
+            window.location.href = 'papermaker.html';
         }
 
-        function saveAccount() {
-            var login = document.getElementById('accountLogin').value.trim();
-            var password = document.getElementById('accountPassword').value.trim();
-            var errorEl = document.getElementById('accountError');
-            var successEl = document.getElementById('accountSuccess');
 
-            errorEl.style.display = 'none';
-            successEl.style.display = 'none';
+        var favorites = [];
 
-            if (!login || login.length < 2) {
-                errorEl.textContent = 'Логин должен быть не менее 2 символов';
-                errorEl.style.display = 'block';
-                return;
-            }
-
-            if (!password || password.length < 3) {
-                errorEl.textContent = 'Пароль должен быть не менее 3 символов';
-                errorEl.style.display = 'block';
-                return;
-            }
-
-            var avatarData = null;
-            var avatarPreview = document.querySelector('#avatarPreview img');
-            if (avatarPreview) {
-                avatarData = avatarPreview.src;
-            }
-
-            accountData = {
-                login: login,
-                password: password,
-                avatar: avatarData,
-                created: accountData ? accountData.created : new Date().toISOString()
-            };
-
+        function loadFavorites() {
             try {
-                localStorage.setItem('shnuk_account', JSON.stringify(accountData));
-                updateAvatarUI();
-                successEl.textContent = 'Аккаунт успешно сохранён!';
-                successEl.style.display = 'block';
-                setTimeout(function() {
-                    successEl.style.display = 'none';
-                }, 3000);
-            } catch(e) {
-                errorEl.textContent = 'Ошибка сохранения: ' + e.message;
-                errorEl.style.display = 'block';
+                var data = localStorage.getItem('shnuk_favorites');
+                if (data) favorites = JSON.parse(data);
+            } catch(e) { favorites = []; }
+        }
+
+        function saveFavorites() {
+            try {
+                localStorage.setItem('shnuk_favorites', JSON.stringify(favorites));
+            } catch(e) {}
+        }
+
+        function addFavorite(item) {
+            var exists = favorites.some(function(f) { return f.question === item.question && f.type === item.type; });
+            if (!exists) {
+                favorites.push(item);
+                saveFavorites();
+                renderFavorites();
             }
         }
 
-        function deleteAccount() {
-            if (!confirm('Вы уверены, что хотите удалить аккаунт? Все данные будут потеряны!')) return;
+        function removeFavorite(index) {
+            if (index >= 0 && index < favorites.length) {
+                favorites.splice(index, 1);
+                saveFavorites();
+                renderFavorites();
+            }
+        }
+
+        function isFavorite(question, type) {
+            return favorites.some(function(f) { return f.question === question && f.type === type; });
+        }
+
+        function renderFavorites() {
+            var section = document.getElementById('favoritesSection');
+            var container = document.getElementById('favoritesResults');
             
-            try {
-                localStorage.removeItem('shnuk_account');
-                accountData = null;
-                updateAvatarUI();
-                document.getElementById('accountSuccess').textContent = 'Аккаунт удалён';
-                document.getElementById('accountSuccess').style.display = 'block';
-                setTimeout(function() {
-                    closeAccountModal();
-                }, 1500);
-            } catch(e) {
-                document.getElementById('accountError').textContent = 'Ошибка: ' + e.message;
-                document.getElementById('accountError').style.display = 'block';
+            if (favorites.length === 0) {
+                section.style.display = 'none';
+                container.innerHTML = '';
+                return;
             }
+            
+            section.style.display = 'block';
+            var html = '';
+            favorites.forEach(function(item, idx) {
+                var answerId = 'favAns' + idx;
+                html += `
+                    <div class="result-item favorite">
+                        <div class="question">${idx+1}. ${item.question}</div>
+                        <div class="answer" id="${answerId}">Ответ: ${item.answer}</div>
+                        ${item.source ? `<div class="source">Источник: ${item.source}</div>` : ''}
+                        ${item.level ? `<div class="source">Уровень: ${item.level}</div>` : ''}
+                        <div class="actions">
+                            <button class="show-answer-btn" onclick="document.getElementById('${answerId}').classList.toggle('show')">Показать ответ</button>
+                            <button class="fav-btn active" onclick="removeFavorite(${idx})">★ Убрать</button>
+                            <button class="png-btn" onclick="saveItemPNG('${item.question.replace(/'/g, "\\'")}', '${item.answer.replace(/'/g, "\\'")}')">PNG вопрос</button>
+                            <button class="png-btn" onclick="saveAnswerPNG('${item.answer.replace(/'/g, "\\'")}')">PNG ответ</button>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
         }
 
-        function loadAvatar(event) {
-            var file = event.target.files[0];
-            if (!file) return;
-
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                var preview = document.getElementById('avatarPreview');
-                preview.innerHTML = '<img src="' + e.target.result + '" alt="Аватар">';
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function updateAvatarUI() {
-            var btn = document.getElementById('avatarBtn');
-            if (accountData && accountData.avatar) {
-                btn.innerHTML = '<img src="' + accountData.avatar + '" alt="Аватар">';
+        function saveItemPNG(question, answer) {
+            var div = document.createElement('div');
+            div.style.cssText = 'padding:20px; background:#fff; font-family: ST-SimpleSquare, sans-serif; max-width:600px;';
+            div.innerHTML = `
+                <div style="font-size:18px; color:#000;">${question}</div>
+                <div style="margin-top:20px; font-size:12px; color:#888; letter-spacing:2px; text-transform:uppercase;">Shnuk Projects</div>
+            `;
+            document.body.appendChild(div);
+            
+            if (typeof html2canvas !== 'undefined') {
+                html2canvas(div, {
+                    scale: 2,
+                    useCORS: true,
+                    backgroundColor: '#ffffff'
+                }).then(function(canvas) {
+                    var link = document.createElement('a');
+                    link.download = 'shnuk_question.png';
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                    document.body.removeChild(div);
+                }).catch(function() {
+                    document.body.removeChild(div);
+                    alert('Ошибка сохранения PNG.');
+                });
             } else {
-                btn.innerHTML = '<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M12 14c-4 0-7 2-7 4v2h14v-2c0-2-3-4-7-4z"/></svg>';
-            }
-
-            if (accountData) {
-                document.getElementById('accountLogin').value = accountData.login || '';
-                document.getElementById('accountPassword').value = accountData.password || '';
-                if (accountData.avatar) {
-                    document.getElementById('avatarPreview').innerHTML = '<img src="' + accountData.avatar + '" alt="Аватар">';
-                }
+                alert('Библиотека html2canvas не загружена.');
+                document.body.removeChild(div);
             }
         }
 
-        function openAccountModal() {
-            if (accountData) {
-                document.getElementById('accountLogin').value = accountData.login || '';
-                document.getElementById('accountPassword').value = accountData.password || '';
-                if (accountData.avatar) {
-                    document.getElementById('avatarPreview').innerHTML = '<img src="' + accountData.avatar + '" alt="Аватар">';
-                }
-            }
-            document.getElementById('accountModal').classList.add('active');
-            document.getElementById('accountError').style.display = 'none';
-            document.getElementById('accountSuccess').style.display = 'none';
-            refreshDataViewer();
-        }
-
-        function closeAccountModal() {
-            document.getElementById('accountModal').classList.remove('active');
-        }
-
-        document.getElementById('accountModal').addEventListener('click', function(e) {
-            if (e.target === this) closeAccountModal();
-        });
-
-        // ===== ВКЛАДКИ В МОДАЛКЕ =====
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(function(el) {
-                el.classList.remove('active');
-            });
-            document.querySelectorAll('.tab-btn').forEach(function(el) {
-                el.classList.remove('active');
-            });
-            document.getElementById('tab-' + tabId).classList.add('active');
-            document.querySelector('.tab-btn[data-tab="' + tabId + '"]').classList.add('active');
+        function saveAnswerPNG(answer) {
+            var div = document.createElement('div');
+            div.style.cssText = 'padding:20px; background:#fff; font-family: ST-SimpleSquare, sans-serif; max-width:600px;';
+            div.innerHTML = `
+                <div style="font-size:18px; color:#cc0000; font-weight:700;">Ответ: ${answer}</div>
+                <div style="margin-top:20px; font-size:12px; color:#888; letter-spacing:2px; text-transform:uppercase;">Shnuk Projects</div>
+            `;
+            document.body.appendChild(div);
             
-            if (tabId === 'data') refreshDataViewer();
-        }
-
-        // ===== ПРОСМОТР ДАННЫХ =====
-        function refreshDataViewer() {
-            var viewer = document.getElementById('dataViewer');
-            var data = {};
-            try {
-                for (var i = 0; i < localStorage.length; i++) {
-                    var key = localStorage.key(i);
-                    var value = localStorage.getItem(key);
-                    try {
-                        data[key] = JSON.parse(value);
-                    } catch(e) {
-                        data[key] = value;
-                    }
-                }
-                viewer.textContent = JSON.stringify(data, null, 2);
-            } catch(e) {
-                viewer.textContent = 'Ошибка загрузки данных: ' + e.message;
+            if (typeof html2canvas !== 'undefined') {
+                html2canvas(div, {
+                    scale: 2,
+                    useCORS: true,
+                    backgroundColor: '#ffffff'
+                }).then(function(canvas) {
+                    var link = document.createElement('a');
+                    link.download = 'shnuk_answer.png';
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                    document.body.removeChild(div);
+                }).catch(function() {
+                    document.body.removeChild(div);
+                    alert('Ошибка сохранения PNG.');
+                });
+            } else {
+                alert('Библиотека html2canvas не загружена.');
+                document.body.removeChild(div);
             }
         }
 
-        function clearAllData() {
-            if (!confirm('Вы уверены, что хотите очистить ВСЕ данные в памяти браузера? Это действие необратимо!')) return;
-            
-            try {
-                localStorage.clear();
-                accountData = null;
-                updateAvatarUI();
-                refreshDataViewer();
-                document.getElementById('dataSuccess').textContent = 'Все данные очищены';
-                document.getElementById('dataSuccess').style.display = 'block';
-                setTimeout(function() {
-                    document.getElementById('dataSuccess').style.display = 'none';
-                }, 3000);
-            } catch(e) {
-                document.getElementById('dataError').textContent = 'Ошибка: ' + e.message;
-                document.getElementById('dataError').style.display = 'block';
-            }
-        }
-
-        // ===== БЕКАП =====
         function createBackup() {
             try {
                 var data = {};
@@ -1397,11 +1329,9 @@
                     var key = localStorage.key(i);
                     data[key] = localStorage.getItem(key);
                 }
-                
                 var json = JSON.stringify(data, null, 2);
                 var blob = new Blob([json], {type: 'application/json'});
                 var url = URL.createObjectURL(blob);
-                
                 var a = document.createElement('a');
                 a.href = url;
                 a.download = 'shnuk_backup_' + new Date().toISOString().slice(0,10) + '.shnuk';
@@ -1409,7 +1339,6 @@
                 a.click();
                 document.body.removeChild(a);
                 URL.revokeObjectURL(url);
-                
                 document.getElementById('backupSuccess').textContent = 'Бекап создан и скачан!';
                 document.getElementById('backupSuccess').style.display = 'block';
                 setTimeout(function() {
@@ -1436,10 +1365,8 @@
                             count++;
                         }
                     }
-                    
-                    loadAccount();
-                    refreshDataViewer();
-                    
+                    loadFavorites();
+                    renderFavorites();
                     document.getElementById('backupSuccess').textContent = 'Бекап восстановлен! (' + count + ' записей)';
                     document.getElementById('backupSuccess').style.display = 'block';
                     setTimeout(function() {
@@ -1453,7 +1380,57 @@
             reader.readAsText(file);
         }
 
-        // ===== ПЕРЕКЛЮЧЕНИЕ ШРИФТА =====
+        function clearAllData() {
+            if (!confirm('Вы уверены, что хотите очистить ВСЕ данные в памяти браузера?')) return;
+            try {
+                localStorage.clear();
+                favorites = [];
+                renderFavorites();
+                refreshDataViewer();
+                document.getElementById('backupSuccess').textContent = 'Все данные очищены';
+                document.getElementById('backupSuccess').style.display = 'block';
+                setTimeout(function() {
+                    document.getElementById('backupSuccess').style.display = 'none';
+                }, 3000);
+            } catch(e) {
+                document.getElementById('backupError').textContent = 'Ошибка: ' + e.message;
+                document.getElementById('backupError').style.display = 'block';
+            }
+        }
+
+        function refreshDataViewer() {
+            var viewer = document.getElementById('dataViewer');
+            viewer.style.display = viewer.style.display === 'none' ? 'block' : 'none';
+            if (viewer.style.display === 'block') {
+                var data = {};
+                try {
+                    for (var i = 0; i < localStorage.length; i++) {
+                        var key = localStorage.key(i);
+                        var value = localStorage.getItem(key);
+                        try { data[key] = JSON.parse(value); } catch(e) { data[key] = value; }
+                    }
+                    viewer.textContent = JSON.stringify(data, null, 2);
+                } catch(e) {
+                    viewer.textContent = 'Ошибка загрузки данных: ' + e.message;
+                }
+            }
+        }
+
+        function openBackupModal() {
+            document.getElementById('backupModal').classList.add('active');
+            document.getElementById('backupError').style.display = 'none';
+            document.getElementById('backupSuccess').style.display = 'none';
+            document.getElementById('dataViewer').style.display = 'none';
+        }
+
+        function closeBackupModal() {
+            document.getElementById('backupModal').classList.remove('active');
+        }
+
+        document.getElementById('backupModal').addEventListener('click', function(e) {
+            if (e.target === this) closeBackupModal();
+        });
+
         function toggleFont() {
             var checkbox = document.getElementById('fontToggle');
             var label = document.getElementById('fontToggleLabel');
@@ -1468,13 +1445,11 @@
                 label.textContent = 'Системный';
                 label.classList.remove('active');
             }
-            
             try {
                 localStorage.setItem('shnuk_font', checkbox.checked ? 'custom' : 'system');
             } catch(e) {}
         }
 
-        // ===== ФУНКЦИИ ДЛЯ ОКОН ВЫБОРА =====
         function toggleSelectWindow(windowId) {
             var windowEl = document.getElementById(windowId);
             document.querySelectorAll('.custom-select-window.open').forEach(function(el) {
@@ -1528,8 +1503,8 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            loadAccount();
-            
+            loadFavorites();
+            renderFavorites();
             try {
                 var fontSetting = localStorage.getItem('shnuk_font');
                 if (fontSetting === 'system') {
@@ -1537,28 +1512,20 @@
                     toggleFont();
                 }
             } catch(e) {}
-
             var mathOptions = document.querySelectorAll('#mathTypeOptions .option-item');
             mathOptions.forEach(function(opt) {
-                if (opt.dataset.value === 'standard') {
-                    opt.classList.add('selected-option-item');
-                }
+                if (opt.dataset.value === 'standard') opt.classList.add('selected-option-item');
             });
             var historyOptions = document.querySelectorAll('#historyPeriodOptions .option-item');
             historyOptions.forEach(function(opt) {
-                if (opt.dataset.value === 'russia9') {
-                    opt.classList.add('selected-option-item');
-                }
+                if (opt.dataset.value === 'russia9') opt.classList.add('selected-option-item');
             });
             var diffOptions = document.querySelectorAll('#textDifficultyOptions .option-item');
             diffOptions.forEach(function(opt) {
-                if (opt.dataset.value === 'T1') {
-                    opt.classList.add('selected-option-item');
-                }
+                if (opt.dataset.value === 'T1') opt.classList.add('selected-option-item');
             });
         });
 
-        // ===== Shnuk Math =====
         function updateMathRange() {
             var min = parseInt(document.getElementById('mathRangeMin').value);
             var max = parseInt(document.getElementById('mathRangeMax').value);
@@ -1585,9 +1552,7 @@
             var count = parseInt(document.getElementById('mathCount').value);
             var min = parseInt(document.getElementById('mathRangeMin').value);
             var max = parseInt(document.getElementById('mathRangeMax').value);
-            var actions = parseInt(document.getElementById('mathActions').value);
             var type = document.getElementById('mathType').value;
-            var decimals = document.getElementById('mathDecimals').checked;
             var results = document.getElementById('mathResults');
 
             var html = '';
@@ -1613,18 +1578,35 @@
                     else answer = (num / num2).toFixed(2);
                 }
 
+                var id = 'mathAns' + i;
                 html += `
-                    <div class="result-item">
+                    <div class="result-item" id="mathItem${i}">
                         <div class="question">${i+1}. ${question}</div>
-                        <div class="answer" id="mathAns${i}">Ответ: ${answer}</div>
-                        <button class="show-answer-btn" onclick="document.getElementById('mathAns${i}').classList.toggle('show')">Показать ответ</button>
+                        <div class="answer" id="${id}">Ответ: ${answer}</div>
+                        <div class="actions">
+                            <button class="show-answer-btn" onclick="document.getElementById('${id}').classList.toggle('show')">Показать ответ</button>
+                            <button class="fav-btn ${isFavorite(question, 'math') ? 'active' : ''}" onclick="toggleMathFavorite('${question.replace(/'/g, "\\'")}', '${answer.replace(/'/g, "\\'")}', this)">★</button>
+                            <button class="png-btn" onclick="saveItemPNG('${question.replace(/'/g, "\\'")}', '${answer.replace(/'/g, "\\'")}')">PNG вопрос</button>
+                            <button class="png-btn" onclick="saveAnswerPNG('${answer.replace(/'/g, "\\'")}')">PNG ответ</button>
+                        </div>
                     </div>
                 `;
             }
             results.innerHTML = html;
         }
 
-        // ===== Shnuk Math Logic =====
+        function toggleMathFavorite(question, answer, btn) {
+            var item = { type: 'math', question: question, answer: answer };
+            if (isFavorite(question, 'math')) {
+                var idx = favorites.findIndex(function(f) { return f.question === question && f.type === 'math'; });
+                if (idx !== -1) removeFavorite(idx);
+                if (btn) btn.classList.remove('active');
+            } else {
+                addFavorite(item);
+                if (btn) btn.classList.add('active');
+            }
+        }
+
         var LOGIC_TASKS = [
             { q: 'В школе 300 учащихся. 60% — девочки. Сколько мальчиков?', a: '120', src: 'Математика, 5 класс, Виленкин' },
             { q: 'Поезд ехал 3 часа со скоростью 80 км/ч. Какое расстояние он проехал?', a: '240 км', src: 'Математика, 4 класс, Моро' },
@@ -1641,26 +1623,41 @@
         function generateLogic() {
             var count = parseInt(document.getElementById('logicCount').value);
             var results = document.getElementById('logicResults');
-            
-            // Перемешиваем и берём ровно столько, сколько указано в ползунке
             var shuffled = LOGIC_TASKS.sort(function() { return Math.random() - 0.5; });
             var selected = shuffled.slice(0, Math.min(count, LOGIC_TASKS.length));
 
             var html = '';
             selected.forEach(function(task, i) {
+                var id = 'logicAns' + i;
                 html += `
-                    <div class="result-item">
+                    <div class="result-item" id="logicItem${i}">
                         <div class="question">${i+1}. ${task.q}</div>
-                        <div class="answer" id="logicAns${i}">Ответ: ${task.a}</div>
-                        <button class="show-answer-btn" onclick="document.getElementById('logicAns${i}').classList.toggle('show')">Показать ответ</button>
+                        <div class="answer" id="${id}">Ответ: ${task.a}</div>
                         <div class="source">Источник: ${task.src}</div>
+                        <div class="actions">
+                            <button class="show-answer-btn" onclick="document.getElementById('${id}').classList.toggle('show')">Показать ответ</button>
+                            <button class="fav-btn ${isFavorite(task.q, 'logic') ? 'active' : ''}" onclick="toggleLogicFavorite('${task.q.replace(/'/g, "\\'")}', '${task.a.replace(/'/g, "\\'")}', '${task.src.replace(/'/g, "\\'")}', this)">★</button>
+                            <button class="png-btn" onclick="saveItemPNG('${task.q.replace(/'/g, "\\'")}', '${task.a.replace(/'/g, "\\'")}')">PNG вопрос</button>
+                            <button class="png-btn" onclick="saveAnswerPNG('${task.a.replace(/'/g, "\\'")}')">PNG ответ</button>
+                        </div>
                     </div>
                 `;
             });
             results.innerHTML = html;
         }
 
-        // ===== Shnuk History =====
+        function toggleLogicFavorite(question, answer, source, btn) {
+            var item = { type: 'logic', question: question, answer: answer, source: source };
+            if (isFavorite(question, 'logic')) {
+                var idx = favorites.findIndex(function(f) { return f.question === question && f.type === 'logic'; });
+                if (idx !== -1) removeFavorite(idx);
+                if (btn) btn.classList.remove('active');
+            } else {
+                addFavorite(item);
+                if (btn) btn.classList.add('active');
+            }
+        }
+
         var HISTORY_DATA = {
             russia9: [
                 { q: 'В каком году произошло Крещение Руси?', a: '988 г.', src: 'История России, 6 класс, Торкунов' },
@@ -1729,26 +1726,41 @@
             var count = parseInt(document.getElementById('historyCount').value);
             var results = document.getElementById('historyResults');
             var data = HISTORY_DATA[period] || [];
-            
-            // Перемешиваем и берём ровно столько, сколько указано в ползунке
             var shuffled = data.sort(function() { return Math.random() - 0.5; });
             var selected = shuffled.slice(0, Math.min(count, data.length));
 
             var html = '';
             selected.forEach(function(item, i) {
+                var id = 'historyAns' + i;
                 html += `
-                    <div class="result-item">
+                    <div class="result-item" id="historyItem${i}">
                         <div class="question">${i+1}. ${item.q}</div>
-                        <div class="answer" id="historyAns${i}">Ответ: ${item.a}</div>
-                        <button class="show-answer-btn" onclick="document.getElementById('historyAns${i}').classList.toggle('show')">Показать ответ</button>
+                        <div class="answer" id="${id}">Ответ: ${item.a}</div>
                         <div class="source">Источник: ${item.src}</div>
+                        <div class="actions">
+                            <button class="show-answer-btn" onclick="document.getElementById('${id}').classList.toggle('show')">Показать ответ</button>
+                            <button class="fav-btn ${isFavorite(item.q, 'history') ? 'active' : ''}" onclick="toggleHistoryFavorite('${item.q.replace(/'/g, "\\'")}', '${item.a.replace(/'/g, "\\'")}', '${item.src.replace(/'/g, "\\'")}', this)">★</button>
+                            <button class="png-btn" onclick="saveItemPNG('${item.q.replace(/'/g, "\\'")}', '${item.a.replace(/'/g, "\\'")}')">PNG вопрос</button>
+                            <button class="png-btn" onclick="saveAnswerPNG('${item.a.replace(/'/g, "\\'")}')">PNG ответ</button>
+                        </div>
                     </div>
                 `;
             });
             results.innerHTML = html;
         }
 
-        // ===== Переключение Math подразделов =====
+        function toggleHistoryFavorite(question, answer, source, btn) {
+            var item = { type: 'history', question: question, answer: answer, source: source };
+            if (isFavorite(question, 'history')) {
+                var idx = favorites.findIndex(function(f) { return f.question === question && f.type === 'history'; });
+                if (idx !== -1) removeFavorite(idx);
+                if (btn) btn.classList.remove('active');
+            } else {
+                addFavorite(item);
+                if (btn) btn.classList.add('active');
+            }
+        }
+
         function showMathSub(id) {
             document.getElementById('mathStandard').style.display = id === 'mathStandard' ? 'block' : 'none';
             document.getElementById('mathLogic').style.display = id === 'mathLogic' ? 'block' : 'none';
@@ -1756,21 +1768,20 @@
             document.getElementById('logicResults').innerHTML = '';
         }
 
-        // ===== SHNUK TEXT =====
         var TEXT_TASKS = [
-            { q: 'Укажите предложение, в котором средством выразительности является метАфора. 1) Ветер играл с листьями. 2) Солнце улыбалось из-за туч. 3) Дождь стучал по крыше. 4) Снег лежал белым покрывалом.', a: '4) Снег лежал белым покрывалом.', level: 'T1' },
+            { q: 'Укажите предложение, в котором средством выразительности является метафора. 1) Ветер играл с листьями. 2) Солнце улыбалось из-за туч. 3) Дождь стучал по крыше. 4) Снег лежал белым покрывалом.', a: '4) Снег лежал белым покрывалом.', level: 'T1' },
             { q: 'В каком варианте ответа правильно указаны все цифры, на месте которых пишется НН? Наступила долгожда(1)ая весна, и в саду зацвели яблони, посаже(2)ые ещё дедом.', a: '1, 2', level: 'T1' },
-            { q: 'В каком слове на месте пропуска пишется буква Е? 1) пр_зидент 2) пр_митивный 3) пр_вилегия 4) пр_тензия', a: '1) прЕзидент', level: 'T1' },
+            { q: 'В каком слове на месте пропуска пишется буква Е? 1) пр_зидент 2) пр_митивный 3) пр_вилегия 4) пр_тензия', a: '1) президент', level: 'T1' },
             { q: 'В каком ряду все слова пишутся через дефис? 1) (по)больше, (кое)как 2) (пол)лимона, (светло)зелёный 3) (во)первых, (едва)едва 4) (юго)запад, (в)дали', a: '3) (во)первых, (едва)едва', level: 'T1' },
             { q: 'Укажите предложение, в котором средством выразительности является олицетворение. 1) Ветер завывал в трубе. 2) Снег искрился на солнце. 3) Дорога убегала вдаль. 4) Лес стоял молчаливый.', a: '3) Дорога убегала вдаль.', level: 'T1' },
             { q: 'В каком слове ударение падает на второй слог? 1) километр 2) документ 3) каталог 4) начал', a: '2) документ', level: 'T1' },
-            { q: 'В каком слове на месте пропуска пишется буква И? 1) закле_л 2) увид_л 3) постро_л 4) раста_л', a: '2) увидЕл (от глагола увидеть, II спряжение)', level: 'T1' },
+            { q: 'В каком слове на месте пропуска пишется буква И? 1) закле_л 2) увид_л 3) постро_л 4) раста_л', a: '1) заклеИл', level: 'T1' },
             { q: 'Укажите словосочетание с типом связи СОГЛАСОВАНИЕ. 1) читать книгу 2) быстро бежать 3) его портфель 4) красивый день', a: '4) красивый день', level: 'T1' },
             { q: 'В каком слове ударение падает на последний слог? 1) каталог 2) километр 3) документ 4) свёкла', a: '1) каталог', level: 'T1' },
             { q: 'В каком ряду все слова являются однокоренными? 1) лес, лесник, лестница 2) вода, водитель, водный 3) нос, носик, носить 4) горный, горе, горевать', a: '2) вода, водитель, водный', level: 'T1' },
-            { q: 'В каком слове на месте пропуска пишется Ь? 1) мяч_ 2) ноч_ 3) врач_ 4) луч_', a: '2) ночь (сущ. 3-го скл.)', level: 'T1' },
+            { q: 'В каком слове на месте пропуска пишется Ь? 1) мяч_ 2) ноч_ 3) врач_ 4) луч_', a: '2) ночь', level: 'T1' },
             { q: 'В каком варианте ответа правильно указаны все цифры, на месте которых пишется НН? Мы вошли в пусты(1)ую комнату, где стоял стари(2)ый комод.', a: '1, 2', level: 'T1' },
-            { q: 'В каком слове ударение падает на первый слог? 1) звонИт 2) нАчал 3) квартАл 4) киломЕтр', a: '2) нАчал', level: 'T1' },
+            { q: 'В каком слове ударение падает на первый слог? 1) звонИт 2) начал 3) квартАл 4) киломЕтр', a: '2) начал', level: 'T1' },
             { q: 'Укажите предложение с грамматической ошибкой. 1) Согласно расписания мы пришли вовремя. 2) Благодаря помощи мы справились. 3) Вопреки прогнозу погода была хорошей. 4) По окончании школы он поступил в институт.', a: '1) Согласно расписания (нужно: согласно расписанию)', level: 'T1' },
             { q: 'Укажите вариант, в котором допущена ошибка в образовании формы слова. 1) ихние дела 2) более красивый 3) пять килограммов 4) лягте на пол', a: '1) ихние (правильно: их)', level: 'T1' },
             { q: 'В каком предложении НЕ со словом пишется раздельно? 1) (Не)доумевающий взгляд. 2) (Не)выученный урок. 3) (Не)решённая, а списанная задача. 4) (Не)годующий возглас.', a: '3) (Не)решённая, а списанная задача.', level: 'T1' },
@@ -1782,41 +1793,41 @@
             { q: 'Укажите предложение с прямой речью (знаки препинания не расставлены). 1) Как прекрасен этот мир сказал он. 2) Он сказал что мир прекрасен. 3) Мир прекрасен по его словам. 4) Он говорил о красоте мира.', a: '1) "Как прекрасен этот мир", — сказал он.', level: 'T2' },
             { q: 'В каком предложении НЕ с наречием пишется раздельно? 1) (Не)интересно рассказал. 2) (Не)лепо выглядеть. 3) (Не)громко, а тихо. 4) (Не)ожиданно приехал.', a: '3) (Не)громко, а тихо.', level: 'T2' },
             { q: 'В каком варианте ответа правильно указаны все цифры, на месте которых пишется НН? Костёр разгорелся, и мы увидели вымоще(1)ую камнем дорожку, ведущую к стари(2)ому дому.', a: '1, 2', level: 'T2' },
-            { q: 'Укажите слово с чередующейся гласной в корне. 1) прилагательное 2) земляной 3) гористый 4) водяной', a: '1) прилагательное (корень -лаг-/-лож-)', level: 'T2' },
-            { q: 'Укажите вариант, в котором все слова пишутся раздельно. 1) (в)начале, (в)продолжение 2) (в)течение, (в)виду 3) (на)подобие, (в)следствие 4) (в)место, (в)роде', a: '2) (в)течение, (в)виду (в значении "из-за")', level: 'T2' },
+            { q: 'Укажите слово с чередующейся гласной в корне. 1) прилагательное 2) земляной 3) гористый 4) водяной', a: '1) прилагательное', level: 'T2' },
+            { q: 'Укажите вариант, в котором все слова пишутся раздельно. 1) (в)начале, (в)продолжение 2) (в)течение, (в)виду 3) (на)подобие, (в)следствие 4) (в)место, (в)роде', a: '2) (в)течение, (в)виду', level: 'T2' },
             { q: 'В каком варианте ответа все слова пишутся с одной Н? 1) ю_ый, румя_ый 2) стекля_ый, оловя_ый 3) деревя_ый, кожа_ый 4) ветре_ый, песо_ый', a: '1) юный, румяный', level: 'T2' },
-            { q: 'В каком предложении есть пунктуационная ошибка? 1) Мама, я люблю тебя! 2) Он спросил, где я был. 3) Я знаю, что ты придёшь. 4) Мы гуляли, и играли, и смеялись.', a: '4) Мы гуляли, и играли, и смеялись. (лишние запятые)', level: 'T2' },
-            { q: 'Укажите ряд, в котором на месте пропуска во всех словах пишется И. 1) пр_обрести, пр_одолеть 2) пр_зидент, пр_мьер 3) пр_кратить, пр_лежный 4) пр_вилегия, пр_тензия', a: '2) прЕзидент, прЕмьер (слова-исключения)', level: 'T2' },
+            { q: 'В каком предложении есть пунктуационная ошибка? 1) Мама, я люблю тебя! 2) Он спросил, где я был. 3) Я знаю, что ты придёшь. 4) Мы гуляли, и играли, и смеялись.', a: '4) Мы гуляли, и играли, и смеялись.', level: 'T2' },
+            { q: 'Укажите ряд, в котором на месте пропуска во всех словах пишется И. 1) пр_обрести, пр_одолеть 2) пр_зидент, пр_мьер 3) пр_кратить, пр_лежный 4) пр_вилегия, пр_тензия', a: '2) президент, премьер', level: 'T2' },
             { q: 'В каком словосочетании использовано деепричастие? 1) прочитав книгу 2) читающий мальчик 3) прочитанная книга 4) читать книгу', a: '1) прочитав книгу', level: 'T2' },
-            { q: 'В каком слове на месте пропуска пишется О? 1) заг_релый 2) приг_реть 3) к_снуться 4) р_сток', a: '1) загорелый (корень -гор- под ударением)', level: 'T2' },
+            { q: 'В каком слове на месте пропуска пишется О? 1) заг_релый 2) приг_реть 3) к_снуться 4) р_сток', a: '1) загорелый', level: 'T2' },
             { q: 'Укажите пример с ошибкой в образовании формы родительного падежа множественного числа. 1) нет чулок 2) нет носок 3) много дел 4) пара сапог', a: '2) нет носок (правильно: нет носков)', level: 'T2' },
             { q: 'Укажите слово с приставкой ПРИ- в значении "неполнота действия". 1) приоткрыть 2) прибежать 3) привокзальный 4) приморский', a: '1) приоткрыть', level: 'T2' },
-            { q: 'В каком варианте ответа все слова пишутся слитно? 1) (в)даль, (в)продолжение 2) (на)подобие, (в)следствие 3) (в)течение, (в)виду 4) (в)место, (в)роде', a: '2) наподобие, вследствие (производные предлоги)', level: 'T2' },
+            { q: 'В каком варианте ответа все слова пишутся слитно? 1) (в)даль, (в)продолжение 2) (на)подобие, (в)следствие 3) (в)течение, (в)виду 4) (в)место, (в)роде', a: '2) наподобие, вследствие', level: 'T2' },
             { q: 'В каком предложении средством выразительности является сравнение? 1) Глаза её сияли как звёзды. 2) Ветер пел свою песню. 3) Дорога убегала вдаль. 4) Лес стоял молчаливый.', a: '1) Глаза её сияли как звёзды.', level: 'T2' },
-            { q: 'В каком варианте ответа указаны все слова, где пропущена буква И? 1) пр_обрести 2) пр_кратить 3) пр_зирать (врага) 4) пр_клонить (голову)', a: '1, 2, 3 (приобрести, прекратить, презирать)', level: 'T2' },
-            { q: 'Укажите слово с чередующейся гласной в корне. 1) коснуться 2) горевать 3) растительность 4) загореть', a: '1) коснуться (корень -кос-/-кас-)', level: 'T2' },
+            { q: 'В каком варианте ответа указаны все слова, где пропущена буква И? 1) пр_обрести 2) пр_кратить 3) пр_зирать (врага) 4) пр_клонить (голову)', a: '1, 2, 3', level: 'T2' },
+            { q: 'Укажите слово с чередующейся гласной в корне. 1) коснуться 2) горевать 3) растительность 4) загореть', a: '1) коснуться', level: 'T2' },
             { q: 'Укажите предложение, в котором необходимо поставить две запятые. 1) Солнце село и наступила ночь. 2) Он пришёл и увидел и удивился. 3) Дождь прошёл и выглянуло солнце. 4) Мы проснулись и пошли гулять.', a: '2) Он пришёл, и увидел, и удивился.', level: 'T2' },
-            { q: 'В каком ряду все слова с НЕ пишутся слитно? 1) (не)вежда, (не)доумевать 2) (не)думая, (не)громко 3) (не)решенный, (не)смотря 4) (не)внимание, (не)хорошо', a: '1) невежда, недоумевать (без НЕ не употребляются)', level: 'T2' },
+            { q: 'В каком ряду все слова с НЕ пишутся слитно? 1) (не)вежда, (не)доумевать 2) (не)думая, (не)громко 3) (не)решенный, (не)смотря 4) (не)внимание, (не)хорошо', a: '1) невежда, недоумевать', level: 'T2' },
             { q: 'Укажите пример с ошибкой в употреблении паронимов. 1) надеть пальто 2) одеть ребёнка 3) представить документы 4) предоставить слово', a: '3) представить документы (нужно: предоставить документы)', level: 'T2' },
-            { q: 'Укажите предложение, в котором допущена пунктуационная ошибка. 1) Я люблю тебя, жизнь. 2) Привет, солнце! 3) Друг, помоги мне. 4) Здравствуй, мой друг.', a: '1) Я люблю тебя, жизнь. (нужно: Я люблю тебя, жизнь! — восклицание)', level: 'T3' },
+            { q: 'Укажите предложение, в котором допущена пунктуационная ошибка. 1) Я люблю тебя, жизнь. 2) Привет, солнце! 3) Друг, помоги мне. 4) Здравствуй, мой друг.', a: '1) Я люблю тебя, жизнь.', level: 'T3' },
             { q: 'В каком предложении нужно поставить двоеточие? 1) Наступил вечер и все разошлись. 2) Я знаю ты придёшь. 3) В лесу было тихо и темно. 4) Он сказал что придёт.', a: '2) Я знаю: ты придёшь.', level: 'T3' },
-            { q: 'Укажите предложение, в котором необходимо поставить запятую перед союзом КАК. 1) Он был умен как бог. 2) Мы ждали его как друга. 3) Он поступил как герой. 4) Я люблю тебя как сына.', a: '1) Он был умен, как бог. (сравнительный оборот)', level: 'T3' },
+            { q: 'Укажите предложение, в котором необходимо поставить запятую перед союзом КАК. 1) Он был умен как бог. 2) Мы ждали его как друга. 3) Он поступил как герой. 4) Я люблю тебя как сына.', a: '1) Он был умен, как бог.', level: 'T3' },
             { q: 'Укажите предложение с обособленным определением. 1) Он шёл улыбаясь. 2) Уставший, он сел на скамью. 3) Тучи рассеялись и выглянуло солнце. 4) Дождь лил как из ведра.', a: '2) Уставший, он сел на скамью.', level: 'T3' },
-            { q: 'Укажите слово, в котором правописание приставки зависит от последующей согласной. 1) бесшумный 2) предыстория 3) преподаватель 4) приехать', a: '1) бесшумный (приставка -без/-бес)', level: 'T3' },
+            { q: 'Укажите слово, в котором правописание приставки зависит от последующей согласной. 1) бесшумный 2) предыстория 3) преподаватель 4) приехать', a: '1) бесшумный', level: 'T3' },
             { q: 'Укажите предложение с вводным словом. 1) К счастью, мы успели на поезд. 2) К счастью можно долго идти. 3) Я рад, что ты пришёл. 4) Солнце к вечеру село.', a: '1) К счастью, мы успели на поезд.', level: 'T3' },
-            { q: 'Укажите предложение с обособленным обстоятельством. 1) Несмотря на дождь, мы пошли гулять. 2) Он сидел задумавшись. 3) Дом стоял на холме. 4) Солнце светило ярко.', a: '1) Несмотря на дождь, мы пошли гулять. (оборот с "несмотря на")', level: 'T3' },
+            { q: 'Укажите предложение с обособленным обстоятельством. 1) Несмотря на дождь, мы пошли гулять. 2) Он сидел задумавшись. 3) Дом стоял на холме. 4) Солнце светило ярко.', a: '1) Несмотря на дождь, мы пошли гулять.', level: 'T3' },
             { q: 'В каком предложении нужно поставить запятую между частями сложного предложения? 1) Солнце взошло и осветило всё вокруг. 2) Он пришёл и сел за стол. 3) Я хочу чтобы ты пришёл. 4) Мы проснулись когда взошло солнце.', a: '3) Я хочу, чтобы ты пришёл.', level: 'T3' },
             { q: 'Укажите предложение с приложением. 1) Он был художник-самоучка. 2) Мы гуляли по парку. 3) Солнце село за горизонт. 4) Ветер стих к вечеру.', a: '1) Он был художник-самоучка.', level: 'T3' },
-            { q: 'Укажите ряд, в котором все слова с НЕ пишутся раздельно. 1) (не)правда, (не)взлюбить 2) (не)плохо, (не)ряха 3) (не)смотря, (не)годуя 4) (не)замеченный, (не)решаясь', a: '4) незамеченный (при полном причастии без зависимых слов) и не решаясь (деепричастие)', level: 'T3' },
+            { q: 'Укажите ряд, в котором все слова с НЕ пишутся раздельно. 1) (не)правда, (не)взлюбить 2) (не)плохо, (не)ряха 3) (не)смотря, (не)годуя 4) (не)замеченный, (не)решаясь', a: '4) (не)замеченный, (не)решаясь', level: 'T3' },
             { q: 'Укажите предложение, в котором средством выразительности является гипербола. 1) Ждал целую вечность. 2) Ветер пел свою песню. 3) Снег лежал белым покрывалом. 4) Солнце улыбалось.', a: '1) Ждал целую вечность.', level: 'T3' },
-            { q: 'В каком предложении допущена ошибка в употреблении деепричастного оборота? 1) Подъезжая к станции, у меня слетела шляпа. 2) Читая книгу, я делал пометки. 3) Гуляя по парку, мы встретили друга. 4) Слушая музыку, он закрыл глаза.', a: '1) Подъезжая к станции, у меня слетела шляпа. (действие не согласовано)', level: 'T3' },
+            { q: 'В каком предложении допущена ошибка в употреблении деепричастного оборота? 1) Подъезжая к станции, у меня слетела шляпа. 2) Читая книгу, я делал пометки. 3) Гуляя по парку, мы встретили друга. 4) Слушая музыку, он закрыл глаза.', a: '1) Подъезжая к станции, у меня слетела шляпа.', level: 'T3' },
             { q: 'Укажите вариант, в котором все слова пишутся через дефис. 1) (по)осеннему, (кое)что 2) (пол)арбуза, (темно)красный 3) (юго)восток, (в)следствие 4) (по)немногу, (в)течение', a: '1) по-осеннему, кое-что', level: 'T3' },
-            { q: 'В каком слове на месте пропуска пишется Ъ? 1) об_яснение 2) под_езд 3) с_экономить 4) меж_языковой', a: '2) подъезд (после приставки на согласную перед е, ё, ю, я)', level: 'T3' },
+            { q: 'В каком слове на месте пропуска пишется Ъ? 1) об_яснение 2) под_езд 3) с_экономить 4) меж_языковой', a: '2) подъезд', level: 'T3' },
             { q: 'Укажите предложение с составным именным сказуемым. 1) Он стал врачом. 2) Он начал читать. 3) Он хотел уйти. 4) Он продолжал работать.', a: '1) Он стал врачом.', level: 'T3' },
             { q: 'В каком варианте ответа правильно указаны все цифры, на месте которых пишется НН? Мы остановились в гости(1)ице, где нас встретил любез(2)ый администратор.', a: '1, 2', level: 'T3' },
             { q: 'Укажите предложение с обособленным приложением. 1) Пушкин, великий поэт, родился в Москве. 2) Мы гуляли по парку. 3) Солнце село за горизонт. 4) Ветер стих к вечеру.', a: '1) Пушкин, великий поэт, родился в Москве.', level: 'T3' },
-            { q: 'В каком слове ударение падает на третий слог? 1) обеспечЕние 2) баловАть 3) кУхонный 4) зАсветло', a: '1) обеспечение (на третий слог)', level: 'T3' },
-            { q: 'Укажите ряд, в котором все слова пишутся с НЕ слитно. 1) (не)годовать, (не)взрачный 2) (не)плохо, (не)ряха 3) (не)смотря, (не)годуя 4) (не)замеченный, (не)решаясь', a: '1) негодовать, невзрачный (без НЕ не употребляются)', level: 'T3' },
+            { q: 'В каком слове ударение падает на третий слог? 1) обеспечЕние 2) баловАть 3) кУхонный 4) зАсветло', a: '1) обеспечЕние', level: 'T3' },
+            { q: 'Укажите ряд, в котором все слова пишутся с НЕ слитно. 1) (не)годовать, (не)взрачный 2) (не)плохо, (не)ряха 3) (не)смотря, (не)годуя 4) (не)замеченный, (не)решаясь', a: '1) негодовать, невзрачный', level: 'T3' },
             { q: 'В каком предложении нужно поставить тире между подлежащим и сказуемым? 1) Жизнь это борьба. 2) Он был хорошим другом. 3) Мы пришли домой. 4) Солнце светит ярко.', a: '1) Жизнь — это борьба.', level: 'T3' }
         ];
 
@@ -1838,24 +1849,41 @@
 
             var html = '';
             selected.forEach(function(task, i) {
+                var id = 'textAns' + i;
                 html += `
-                    <div class="result-item">
+                    <div class="result-item" id="textItem${i}">
                         <div class="question">${i+1}. ${task.q}</div>
-                        <div class="answer" id="textAns${i}">Ответ: ${task.a}</div>
-                        <button class="show-answer-btn" onclick="document.getElementById('textAns${i}').classList.toggle('show')">Развернуть</button>
-                        <div class="source" style="margin-top:4px; font-size:11px; color:#999;">Уровень: ${task.level}</div>
+                        <div class="answer" id="${id}">Ответ: ${task.a}</div>
+                        <div class="source">Уровень: ${task.level}</div>
+                        <div class="actions">
+                            <button class="show-answer-btn" onclick="document.getElementById('${id}').classList.toggle('show')">Развернуть</button>
+                            <button class="fav-btn ${isFavorite(task.q, 'text') ? 'active' : ''}" onclick="toggleTextFavorite('${task.q.replace(/'/g, "\\'")}', '${task.a.replace(/'/g, "\\'")}', '${task.level}', this)">★</button>
+                            <button class="png-btn" onclick="saveItemPNG('${task.q.replace(/'/g, "\\'")}', '${task.a.replace(/'/g, "\\'")}')">PNG вопрос</button>
+                            <button class="png-btn" onclick="saveAnswerPNG('${task.a.replace(/'/g, "\\'")}')">PNG ответ</button>
+                        </div>
                     </div>
                 `;
             });
             results.innerHTML = html;
         }
 
-        // Инициализация Math Range
+        function toggleTextFavorite(question, answer, level, btn) {
+            var item = { type: 'text', question: question, answer: answer, level: level };
+            if (isFavorite(question, 'text')) {
+                var idx = favorites.findIndex(function(f) { return f.question === question && f.type === 'text'; });
+                if (idx !== -1) removeFavorite(idx);
+                if (btn) btn.classList.remove('active');
+            } else {
+                addFavorite(item);
+                if (btn) btn.classList.add('active');
+            }
+        }
+
         updateMathRange();
 
-        console.log('Shnuk Projects успешно загружен');
-        console.log('Все данные — из реальных источников, ответы проверены');
+        console.log('[Shnuk Projects] Загружен. Twinlay Core активен.');
     </script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </body>
 </html>
