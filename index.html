@@ -366,6 +366,7 @@
             font-weight: 700;
         }
 
+        /* ===== КНОПКИ БЕЗ ОБВОДКИ ===== */
         .control-group .btn-window {
             padding: 8px 30px;
             background: #ffffff;
@@ -396,10 +397,10 @@
         .control-group .btn-window.papermaker-btn {
             background: #ffffff;
             color: #000000;
-            border: 2px solid #cc0000;
             padding: 12px 40px;
             font-size: 15px;
             letter-spacing: 3px;
+            border: none;
         }
 
         .control-group .btn-window.papermaker-btn:hover {
@@ -601,6 +602,7 @@
             padding: 10px 40px;
             background: #cc0000;
             line-height: 1.2;
+            border: none;
         }
 
         .header .subtitle {
@@ -928,9 +930,9 @@
             <div class="section-content">
                 <div style="text-align:center; padding:10px 0;">
                     <p style="font-size:16px; color:#333; margin-bottom:20px; letter-spacing:1px;">
-                        Создавайте и редактируйте свои задания в Papermaker
+                        Создавайте и редактируйте свои презентации в Papermaker
                     </p>
-                    <button class="btn-window papermaker-btn" onclick="openPapermaker()" style="padding:12px 40px; background:#ffffff; color:#000000; border:2px solid #cc0000; font-size:15px; letter-spacing:3px;">
+                    <button class="btn-window papermaker-btn" onclick="openPapermaker()" style="padding:12px 40px; background:#ffffff; color:#000000; font-size:15px; letter-spacing:3px; border:none;">
                         Открыть Papermaker
                     </button>
                 </div>
@@ -941,8 +943,8 @@
             <div class="section-title"><span>SHNUK</span> MATH</div>
             <div class="section-content">
                 <div style="display:flex; gap:15px; flex-wrap:wrap; margin-bottom:15px;">
-                    <button class="btn-window primary" onclick="showMathSub('mathStandard')" style="padding:10px 30px; background:#cc0000; color:#fff;">Shnuk Math</button>
-                    <button class="btn-window" onclick="showMathSub('mathLogic')" style="padding:10px 30px; background:transparent; color:#000;">Shnuk Math Logic</button>
+                    <button class="btn-window primary" onclick="showMathSub('mathStandard')" style="padding:10px 30px; background:#cc0000; color:#fff; border:none;">Shnuk Math</button>
+                    <button class="btn-window" onclick="showMathSub('mathLogic')" style="padding:10px 30px; background:transparent; color:#000; border:none;">Shnuk Math Logic</button>
                 </div>
 
                 <div id="mathStandard">
@@ -997,7 +999,7 @@
                         </div>
                     </div>
 
-                    <button class="btn-window primary" onclick="generateMath()" style="padding:12px 40px; background:#cc0000; color:#fff; font-size:15px; letter-spacing:3px;">Сгенерировать</button>
+                    <button class="btn-window primary" onclick="generateMath()" style="padding:12px 40px; background:#cc0000; color:#fff; font-size:15px; letter-spacing:3px; border:none;">Сгенерировать</button>
 
                     <div class="results" id="mathResults"></div>
                 </div>
@@ -1011,7 +1013,7 @@
                         </div>
                     </div>
 
-                    <button class="btn-window primary" onclick="generateLogic()" style="padding:12px 40px; background:#cc0000; color:#fff; font-size:15px; letter-spacing:3px;">Сгенерировать</button>
+                    <button class="btn-window primary" onclick="generateLogic()" style="padding:12px 40px; background:#cc0000; color:#fff; font-size:15px; letter-spacing:3px; border:none;">Сгенерировать</button>
 
                     <div class="results" id="logicResults"></div>
                 </div>
@@ -1045,7 +1047,7 @@
                     </div>
                 </div>
 
-                <button class="btn-window primary" onclick="generateHistory()" style="padding:12px 40px; background:#cc0000; color:#fff; font-size:15px; letter-spacing:3px;">Сгенерировать</button>
+                <button class="btn-window primary" onclick="generateHistory()" style="padding:12px 40px; background:#cc0000; color:#fff; font-size:15px; letter-spacing:3px; border:none;">Сгенерировать</button>
 
                 <div class="results" id="historyResults"></div>
             </div>
@@ -1069,7 +1071,7 @@
                 <div style="font-size:13px; color:#666; letter-spacing:0.5px; padding:0 16px 8px; margin-bottom:10px;">
                     При генерации выводится 20 уникальных заданий выбранного уровня.
                 </div>
-                <button class="btn-window primary" onclick="generateTextTasks()" style="padding:12px 40px; background:#cc0000; color:#fff; font-size:15px; letter-spacing:3px;">Сгенерировать 20 заданий</button>
+                <button class="btn-window primary" onclick="generateTextTasks()" style="padding:12px 40px; background:#cc0000; color:#fff; font-size:15px; letter-spacing:3px; border:none;">Сгенерировать 20 заданий</button>
                 <div class="results" id="textResults"></div>
             </div>
         </div>
